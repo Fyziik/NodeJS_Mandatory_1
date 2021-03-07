@@ -1,0 +1,66 @@
+<!-- head component -->
+<%- include('../partials/head') %>
+
+<!-- Header -->
+<%- include('../partials/header') %>
+
+<!-- Content -->
+<div class="row">
+    <!-- Sidebar partial -->
+    <%- include('../partials/sidebar') %>
+    <!-- The "meat" of the pages -->
+    <div class="col">
+      <div>
+
+        <h1 style="margin-left: 31.5%;">Session one</h1>
+
+        <div class="sessionContent">
+          <h2>What is Node.js</h2>
+          <p>
+            Before talking about Node.js, we have to talk about Javascript. 
+            Javascript is a programming language used for front-end / client-side computing, 
+            but some people thought it would be nice if you could separate the workload, so that client-side and 
+            server-side could work side by side, instead of only the client-side. Therefore Node.js was created, 
+            making it possible to run Javascript in a stand-alone machine. Therefore Node.js is a Runtime Environment, 
+            not a programming language or a framework in itself. Together with an HTTP module, 
+            it makes it possible to connect this server-side processing with the front-end. 
+            This is bounded with the Express framework (and an endless amount of other frameworks via NPM) 
+            we can easily create applications as needed.
+          </p>
+        </div>
+        
+        <div class="sessionContent">
+          <h2>Setup of server using Node.js</h2>
+          <ol>
+            <li>Create a folder for the project</li>
+            <li>Add a new file, and call it package.json and add {} inside it for it to be valid JSON</li>
+            <li>Run “npm install” in the terminal</li>
+            <li>Run “npm install express” in the terminal to install Express dependency</li>
+            <li>Create entry file (app.js)</li>
+            <li>Add imports (require keyword) to top of the file for Express</li>
+            <li>app.listen(port) added to the bottom of the file</li>
+            <strong>Optional</strong>
+            <li>Add necessary routes from the app.get method, here is a template</li>
+            <!-- TODO make images work -->
+            <img src="..\..\imgs\getRouteExample.PNG" alt="Example of get route">
+          </ol>
+        </div>
+
+        <div class="sessionContent">
+          <h2>Execution of Node.js server</h2>
+          <ul>
+            <li>First of all, make sure that Node.js is installed on the machine.</li>
+            <li>cd into the root directory (not a necessity but will make the process easier), 
+              and run “node [filename]” in the terminal. These have to be .js files.</li>
+          </ul>
+        </div>
+
+
+
+
+      </div>
+    </div>
+</div>
+
+<!-- Footer Component -->
+<%- include('../partials/footer') %>

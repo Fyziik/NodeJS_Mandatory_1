@@ -1,16 +1,19 @@
 const express = require('express')
 const app = express()
 
+app.set('view engine', 'ejs')
+
 const port = 8080
 
 //Index page serving
 app.get("/", (req, res) => {
-    res.sendFile(__dirname + "/index.html")
+    res.render('pages/index')
 })
 
 //Session page serving from various IDs
 app.get("/session/:id", (req, res) => {
-    res.sendFile(__dirname + "/session" + req.params.id + ".html")
+    const pageId = req.params.id
+    res.render('pages/session' + pageId)
 })
 
 
