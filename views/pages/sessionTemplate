@@ -9,10 +9,15 @@
     <!-- Sidebar partial -->
     <%- include('../partials/sidebar') %>
     <!-- The "meat" of the pages -->
-    <div class="col">
+    <div class="col" id="content">
       <div>
 
-        Content goes here
+        <div class="sessionContent">
+          <h2>Topic</h2>
+          <p>
+            Text
+          </p>
+        </div>
 
       </div>
     </div>

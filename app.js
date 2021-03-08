@@ -1,6 +1,8 @@
 const express = require('express')
 const app = express()
 
+
+app.use("/imgs", express.static(__dirname + '/imgs'))
 app.set('view engine', 'ejs')
 
 const port = 8080

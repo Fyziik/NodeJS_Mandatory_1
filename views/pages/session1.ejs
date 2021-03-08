@@ -5,7 +5,7 @@
 <%- include('../partials/header') %>
 
 <!-- Content -->
-<div class="row">
+<div class="row" id="content">
     <!-- Sidebar partial -->
     <%- include('../partials/sidebar') %>
     <!-- The "meat" of the pages -->
@@ -34,15 +34,15 @@
           <ol>
             <li>Create a folder for the project</li>
             <li>Add a new file, and call it package.json and add {} inside it for it to be valid JSON</li>
-            <li>Run “npm install” in the terminal</li>
-            <li>Run “npm install express” in the terminal to install Express dependency</li>
+            <li>Run <em>“npm install”</em> in the terminal</li>
+            <li>Run <em>“npm install express”</em> in the terminal to install Express dependency</li>
             <li>Create entry file (app.js)</li>
             <li>Add imports (require keyword) to top of the file for Express</li>
             <li>app.listen(port) added to the bottom of the file</li>
             <strong>Optional</strong>
             <li>Add necessary routes from the app.get method, here is a template</li>
             <!-- TODO make images work -->
-            <img src="..\..\imgs\getRouteExample.PNG" alt="Example of get route">
+            <img src="/imgs/getRouteExample.PNG" alt="Example of get route">
           </ol>
         </div>
 
@@ -51,7 +51,7 @@
           <ul>
             <li>First of all, make sure that Node.js is installed on the machine.</li>
             <li>cd into the root directory (not a necessity but will make the process easier), 
-              and run “node [filename]” in the terminal. These have to be .js files.</li>
+              and run <em>“node [filename]”</em> in the terminal. These have to be .js files.</li>
           </ul>
         </div>
 
