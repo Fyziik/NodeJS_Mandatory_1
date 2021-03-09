@@ -1,0 +1,5 @@
+Make everything database related, so that sessions are a table, and a session has a connection with topics, topics have notes etc.
+
+Everything would be connected to this database, which would mean sidebar, topics etc. would be dynamically loaded from this database
+
+Also this database would make it possible to insert via a form, so it'd be possible to easily add new sessions, topics, etc.
