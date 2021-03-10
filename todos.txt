@@ -3,3 +3,11 @@ Make everything database related, so that sessions are a table, and a session ha
 Everything would be connected to this database, which would mean sidebar, topics etc. would be dynamically loaded from this database
 
 Also this database would make it possible to insert via a form, so it'd be possible to easily add new sessions, topics, etc.
+
+
+
+
+
+MongoDB collection for a page should contain:
+- Title (This is the session number at top and the name in the sidebar)
+- Text field (This is the text on each page, should be able to insert html tags)
