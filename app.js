@@ -26,6 +26,22 @@ app.get("/session/:id", (req, res) => {
     res.render('pages/session' + pageId)
 })
 
+app.get("/pages/:title", (req, res) => {
+
+    mongoClient.connect(url, function(err, db) {
+        if (err) throw err;
+        var dbo = db.db("mandatoryDB");
+        var query = { title: req.params.title };
+        dbo.collection("pages").find(query).toArray(function(err, result) {
+          if (err) throw err;
+          console.log(result);
+          res.render("pages/session", {result: result})
+          db.close();
+        });
+      }); 
+
+})
+
 //New page for creating new pages via form page
 app.post("/newPage", (req, res) => {
     if (req.body.pageTitle !== "" && req.body.pageContent !== "") {

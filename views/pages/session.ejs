@@ -11,11 +11,10 @@
     <!-- The "meat" of the pages -->
     <div class="col" id="content">
       <div>
-          
-        <% let i = 0 %>
-        <% result.forEach(function(results) { %>
-            <li> <%= result[i].title %> - <%= result[i].content %> </li>
-        <% i += 1}) %>
+
+        <h1 style="margin-left: 31.5%;"> <%= result[0].title %> </h1>
+
+        <%- result[0].content %>
 
       </div>
     </div>
