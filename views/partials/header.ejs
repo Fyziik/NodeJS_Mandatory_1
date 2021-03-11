@@ -15,7 +15,13 @@
 
     <script>
       $('#themeButton').click( () => {
-        window.location = "/changeTheme"
+        fetch("http://localhost:8080/changeTheme", {
+          method: 'GET'
+        });
+        setInterval(() => {
+          location.reload()
+        }, 50)
+        
       })
     </script>
 </nav>

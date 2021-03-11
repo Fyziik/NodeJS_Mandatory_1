@@ -7,6 +7,7 @@ const mongoClient = mongo.MongoClient
 const url = "mongodb://localhost:27017/testDB"
 let lightmode = true
 let themeButtonText = "Darkmode"
+let currentPage = ""
 
 // Make imgs folder servable, and set view engine to ejs for partials & views to be able to render
 app.use("/imgs", express.static(__dirname + '/imgs'))
@@ -83,7 +84,7 @@ app.get("/addNewPage", (req, res) => {
           if (err) throw err;
           db.close();
 
-          res.render('pages/sessionAdd', {result: result, mode: lightmode})
+          res.render('pages/sessionAdd', {result: result, mode: lightmode, themeButtonText: themeButtonText})
 
         });
       });

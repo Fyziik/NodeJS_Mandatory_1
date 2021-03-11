@@ -58,7 +58,7 @@
   }
 
   .contentSection {
-      border-left: 4px black solid;
+      border-left: 4px white solid;
   }
 
   .sessionContent {
@@ -67,6 +67,8 @@
   }
 
   #content {
+      padding-left: 2%;
+      margin-top: 1%;
       padding-bottom: 50px;
       color: white;
   }
