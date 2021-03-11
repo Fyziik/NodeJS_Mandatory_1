@@ -7,14 +7,15 @@
 <!-- Content -->
 <div class="row">
     <!-- Sidebar partial -->
-    <%- include('../partials/sidebar') %>
+    <%- include('../partials/sidebar', {variant:'result'}) %>
+    <% console.log(result) %>
     <!-- The "meat" of the pages -->
     <div class="col" id="content">
       <div>
 
-        <h1 style="margin-left: 31.5%;"> <%= result[0].title %> </h1>
+        <h1 style="margin-left: 33.5%;"> <%= pageContent[0].titleRendered %> </h1>
 
-        <%- result[0].content %>
+        <%- pageContent[0].content %>
 
       </div>
     </div>

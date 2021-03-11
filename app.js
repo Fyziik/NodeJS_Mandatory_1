@@ -11,27 +11,52 @@ app.use("/imgs", express.static(__dirname + '/imgs'))
 app.use(express.json())
 app.use(cors())
 app.set('view engine', 'ejs')
-
-
 const port = 8080
 
 //Index page serving
 app.get("/", (req, res) => {
-    res.render('pages/index')
+    mongoClient.connect(url, function(err, db) {
+        if (err) throw err;
+        const dbo = db.db("mandatoryDB");
+        dbo.collection("pages").find({}).toArray(function(err, result) {
+          if (err) throw err;
+          console.log(result);
+          db.close();
+
+          res.render('pages/index', {result: result})
+
+        });
+      });
+    
 })
 
 //Session page serving from various IDs
-app.get("/session/:id", (req, res) => {
-    const pageId = req.params.id
-    res.render('pages/session' + pageId)
+app.get("/session/:title", (req, res) => {
+    const title = req.params.title
+    mongoClient.connect(url, function(err, db) {
+        if (err) throw err;
+        const dbo = db.db("mandatoryDB");
+        dbo.collection("pages").find({title: title}).toArray(function(err, result) {
+            if (err) throw err;
+            dbo.collection("pages").find({}).toArray(function(err, allResults) {
+                if (err) throw err;
+                db.close();
+
+                res.render('pages/session', {result: allResults, pageContent: result})
+            })
+        });
+      });
+    
 })
 
+
+//Generate page from title
 app.get("/pages/:title", (req, res) => {
 
     mongoClient.connect(url, function(err, db) {
         if (err) throw err;
-        var dbo = db.db("mandatoryDB");
-        var query = { title: req.params.title };
+        let dbo = db.db("mandatoryDB");
+        let query = { title: req.params.title };
         dbo.collection("pages").find(query).toArray(function(err, result) {
           if (err) throw err;
           console.log(result);
@@ -42,30 +67,50 @@ app.get("/pages/:title", (req, res) => {
 
 })
 
+app.get("/addNewPage", (req, res) => {
+    mongoClient.connect(url, function(err, db) {
+        if (err) throw err;
+        const dbo = db.db("mandatoryDB");
+        dbo.collection("pages").find({}).toArray(function(err, result) {
+          if (err) throw err;
+          db.close();
+
+          res.render('pages/sessionAdd', {result: result})
+
+        });
+      });
+})
+
 //New page for creating new pages via form page
+//TODO Make title property in DB unique, so there wont be duplicate sites
 app.post("/newPage", (req, res) => {
     if (req.body.pageTitle !== "" && req.body.pageContent !== "") {
 
+        let title = req.body.pageTitle
+        title = title.substr(0, 7) + title.substr(8, title.length)
+        let titleRendered = req.body.pageTitle
+
         mongoClient.connect(url, function(err, db){
             if (err) throw err;
-            console.log("Database created!")
-            let database = db.db("mandatoryDB")
-            let myObj = { title: req.body.pageTitle, content: req.body.pageContent }
-            database.collection("pages").insertOne(myObj, function(err, db){
-                if (err) throw err;
+            const dbo = db.db("mandatoryDB");
+            let myObj = { title: title, titleRendered: titleRendered, content: req.body.pageContent }
+
+            dbo.collection("pages").insertOne(myObj, function(err, db){
+                if (err) res.redirect('/');
                 console.log("1 document inserted")
-                db.close
+                db.close;
             });
-        })
+        });
     }
 })
 
-//Find specific page, currently just for inspecting data purposes
+
+//Find all pages, currently just for inspecting data purposes
 app.get("/pages", (req, res) => {
 
     mongoClient.connect(url, function(err, db) {
         if (err) throw err;
-        var dbo = db.db("mandatoryDB");
+        const dbo = db.db("mandatoryDB");
         dbo.collection("pages").find({}).toArray(function(err, result) {
           if (err) throw err;
           console.log(result);
@@ -82,7 +127,7 @@ app.delete("/pages", (req, res) => {
 
     mongoClient.connect(url, function(err, db) {
         if (err) throw err;
-        var dbo = db.db("mandatoryDB");
+        const dbo = db.db("mandatoryDB");
         dbo.collection("pages").drop(function(err, delOK) {
           if (err) throw err;
           if (delOK) console.log("Collection deleted");
@@ -90,6 +135,19 @@ app.delete("/pages", (req, res) => {
         });
       }); 
 })
+
+//Delete collection of pages for a clean slate
+app.delete("/pages/:title", (req, res) => {
+
+    mongoClient.connect(url, function(err, db) {
+        if (err) throw err;
+        const dbo = db.db("mandatoryDB");
+        dbo.collection('pages').deleteOne({ title: req.params.title });
+        db.close
+      }); 
+    
+})
+
 
 app.listen(port, (error) => {
     if (error) {

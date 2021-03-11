@@ -1,126 +1,28 @@
 <div class="col-2">
     <div class="accordion" id="accordionExample">
-        <div class="accordion-item">
-          <h2 class="accordion-header" id="headingOne">
-            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-              Session 1
-            </button>
-          </h2>
-          <div id="collapseOne" class="accordion-collapse collapse" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
-            <div class="accordion-body">
-              <ul class="sidebarUL">
-                <li>What is Node.js</li>
-                <li>Setup of server using Node.js</li>
-                <li>Execution of Node.js server</li>
-              </ul>
-              <a href="/session/1" class="btn btn-primary">Go to page</a>
-            </div>
-          </div>
-        </div>
-        <div class="accordion-item">
-          <h2 class="accordion-header" id="headingTwo">
-            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
-              session 2
-            </button>
-          </h2>
-          <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#accordionExample">
-            <div class="accordion-body">
-                <ul>
-                  <li><strong>API</strong><ul>
-                    <li>What's a RESTful API</li>
-                    <li>RESTful APIs philosophy</li>
-                    <li>How to design a fully CRUD RESTful API</li>
-                  </ul></li>
+        <!-- TEMPLATE -->
 
-                  <li><strong>Functions</strong><ul>
-                    <li>Hoisting</li>
-                    <li>Regular function</li>
-                    <li>Variable function / Anonymous function</li>
-                    <li>Arrow function</li>
-                    <li>Callback function</li>
-                  </ul></li>
-                </ul>
-                <a href="/session/2" class="btn btn-primary">Go to page</a>
-            </div>
-          </div>
-        </div>
+        <% let i = 0 %>
+        <% result.forEach(function(results) { %>
         <div class="accordion-item">
-          <h2 class="accordion-header" id="headingThree">
-            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
-              Session 3
+          <h2 class="accordion-header" id="heading<%=result[i].title%>">
+            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse<%=result[i].title%>" aria-expanded="true" aria-controls="collapse<%=result[i].title%>">
+              <%= result[i].titleRendered %>
             </button>
           </h2>
-          <div id="collapseThree" class="accordion-collapse collapse" aria-labelledby="headingThree" data-bs-parent="#accordionExample">
+          <div id="collapse<%=result[i].title%>" class="accordion-collapse collapse" aria-labelledby="heading<%=result[i].title%>" data-bs-parent="#accordionExample">
             <div class="accordion-body">
-                <ul class="sidebarUL">
-                  <li>Theory about variables (var vs let & const)</li>
-                  <li>Type Coercion</li>
-                  <li>NPM (Node Package Manager)</li>
-                  <li>Nodemon</li>
-                </ul>
-                <a href="/session/3" class="btn btn-primary">Go to page</a>
-            </div>
-          </div>
-        </div>
-        <div class="accordion-item">
-          <h2 class="accordion-header" id="headingFour">
-            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseFour" aria-expanded="true" aria-controls="collapseFour">
-              Session 4
-            </button>
-          </h2>
-          <div id="collapseFour" class="accordion-collapse collapse" aria-labelledby="headingFour" data-bs-parent="#accordionExample">
-            <div class="accordion-body">
-              <ul class="sidebarUL">
-                <li>Functional Loops</li>
-                <li>URL Anatomy</li>
-                <li>Receiving data in Express</li>
+              
+              <ul>
+
               </ul>
-              <a href="/session/4" class="btn btn-primary">Go to page</a>
+
+              <a href="/session/<%=result[i].title%>" class="btn btn-primary">Go to page</a>
             </div>
           </div>
         </div>
-        <div class="accordion-item">
-          <h2 class="accordion-header" id="headingFive">
-            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseFive" aria-expanded="true" aria-controls="collapseFive">
-              Session 5
-            </button>
-          </h2>
-          <div id="collapseFive" class="accordion-collapse collapse" aria-labelledby="headingFive" data-bs-parent="#accordionExample">
-            <div class="accordion-body">
-              <ul class="sidebarUL">
-                <li>How to serve .html files</li>
-              </ul>
-              <a href="/session/5" class="btn btn-primary">Go to page</a>
-            </div>
-          </div>
-        </div>
-        <div class="accordion-item">
-          <h2 class="accordion-header" id="headingBonus">
-            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseBonus" aria-expanded="true" aria-controls="collapseBonus">
-              Bonus
-            </button>
-          </h2>
-          <div id="collapseBonus" class="accordion-collapse collapse" aria-labelledby="headingBonus" data-bs-parent="#accordionExample">
-            <div class="accordion-body">
-              <ul class="sidebarUL">
-                <li>EJS</li>
-              </ul>
-              <a href="/session/Bonus" class="btn btn-primary">Go to page</a>
-            </div>
-          </div>
-        </div>
-        <div class="accordion-item">
-          <h2 class="accordion-header" id="headingAdd">
-            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseAdd" aria-expanded="true" aria-controls="collapseAdd">
-              Add new page
-            </button>
-          </h2>
-          <div id="collapseAdd" class="accordion-collapse collapse" aria-labelledby="headingAdd" data-bs-parent="#accordionExample">
-            <div class="accordion-body">
-              Here you can insert new pages of information for the site
-              <a href="/session/Add" class="btn btn-primary">Go to page</a>
-            </div>
-          </div>
-        </div>
+        <% i += 1}) %>
+
+
       </div>
 </div>

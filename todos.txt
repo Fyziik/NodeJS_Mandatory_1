@@ -11,3 +11,282 @@ Also this database would make it possible to insert via a form, so it'd be possi
 MongoDB collection for a page should contain:
 - Title (This is the session number at top and the name in the sidebar)
 - Text field (This is the text on each page, should be able to insert html tags)
+
+
+
+
+Bonus session can contain:
+- EJS
+- How to serve static files
+- MongoDB
+
+
+
+Sessions just in case:
+
+SESSION ONE
+
+<div class="sessionContent">
+          <h2>What is Node.js</h2>
+          <p>
+            Before talking about Node.js, we have to talk about Javascript. 
+            Javascript is a programming language used for front-end / client-side computing, 
+            but some people thought it would be nice if you could separate the workload, so that client-side and 
+            server-side could work side by side, instead of only the client-side. Therefore Node.js was created, 
+            making it possible to run Javascript in a stand-alone machine. Therefore Node.js is a Runtime Environment, 
+            not a programming language or a framework in itself. Together with an HTTP module, 
+            it makes it possible to connect this server-side processing with the front-end. 
+            This is bounded with the Express framework (and an endless amount of other frameworks via NPM) 
+            we can easily create applications as needed.
+          </p>
+        </div>
+        
+        <div class="sessionContent">
+          <h2>Setup of server using Node.js</h2>
+          <ol>
+            <li>Create a folder for the project</li>
+            <li>Add a new file, and call it package.json and add {} inside it for it to be valid JSON</li>
+            <li>Run <em>“npm install”</em> in the terminal</li>
+            <li>Run <em>“npm install express”</em> in the terminal to install Express dependency</li>
+            <li>Create entry file (app.js)</li>
+            <li>Add imports (require keyword) to top of the file for Express</li>
+            <li>app.listen(port) added to the bottom of the file</li>
+            <strong>Optional</strong>
+            <li>Add necessary routes from the app.get method, here is a template</li>
+            <!-- TODO make images work -->
+            <img src="/imgs/getRouteExample.PNG" alt="Example of get route">
+          </ol>
+        </div>
+
+        <div class="sessionContent">
+          <h2>Execution of Node.js server</h2>
+          <ul>
+            <li>First of all, make sure that Node.js is installed on the machine.</li>
+            <li>cd into the root directory (not a necessity but will make the process easier), 
+              and run <em>“node [filename]”</em> in the terminal. These have to be .js files.</li>
+          </ul>
+        </div>
+
+
+    SESSION TWO
+
+    <h1>APIs <button type="button" class="btn btn-primary" id="APIButton">Show</button></h1>
+        
+        <div id="APISection" class="contentSection" hidden>
+          <div class="sessionContent">
+            <h2>What's a RESTful API</h2>
+            <p>An RESTful API is an API which follows the principles of REST, which consists of:</p>
+            <!-- TODO insert picture 'RESTfulAPICheclist.png' -->
+            <img src="/imgs/RESTfulAPIChecklist.PNG" alt="">
+          </div>
+  
+          <div class="sessionContent">
+            <h2>RESTful APIs philosophy</h2>
+            <!-- TODO insert picture 'APIPhilosophy.png' -->
+            <img src="/imgs/APIPhilosophy.PNG" alt="">
+            <p>Basically, a RESTful API should have endpoints of which makes sense, for instance, 
+              if we hit /users with a HTTP GET, we’d expect to retrieve a list of users. 
+              Or if we hit /users/id with a HTTP DELETE, we’d expect to be able to delete a specific user by an id.</p>
+          </div>
+  
+          <div class="sessionContent">
+            <h2>How to design a fully CRUD RESTful API</h2>
+            <!-- TODO insert picture APIDesign.png -->
+            <img src="/imgs/APIDesign.png" alt="">
+            <p>We can use an excel spreadsheet or any textual editor for the creation of the endpoints for a RESTful API. 
+              Here we can see what the different endpoints would result in, for instance would the endpoint /users 
+              as a HTTP GET retrieve a list of all the users.</p>
+          </div>
+        </div>
+        
+
+        <h1>Functions <button type="button" class="btn btn-primary" id="FunctionsButton">Show</button></h1>
+
+        <div id="FunctionsSection" class="contentSection" hidden>
+          <div class="sessionContent">
+            <h2>Hoisting</h2>
+            <p>
+              Javascript "loads" the entire file before executing, which means you can call functions early in the file, 
+              even though they're not defined at that point, so it sorta "understands the future", I suppose. 
+              Only works on specific keywords, such as function. Won't work on const or let etc.
+            </p>
+          </div>
+          
+          <div class="sessionContent">
+            <h2>Regular function</h2>
+            <img src="/imgs/regularFunction.png" alt="">
+          </div>
+
+          <div class="sessionContent">
+            <h2>Variable function / Anonymous function</h2>
+            <img src="/imgs/anonymousFunction.png" alt="">
+          </div>
+
+          <div class="sessionContent">
+            <h2>Arrow function</h2>
+            <img src="/imgs/arrowFunction.png" alt="">
+          </div>
+
+          <div class="sessionContent">
+            <h2>Callback function</h2>
+            <img src="/imgs/callbackFunction.png" alt="">
+          </div>
+        </div>
+        
+
+      </div>
+    </div>
+</div>
+
+<!-- Have to include Jquery link here, and not in footer, since Jquery has to be loaded before assigning $ values 
+     Could fix this by making an "end.ejs" file with only the body & html end tags, and a seperate .ejs file
+     for script insertions -->
+<script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+
+<script>
+  $(function() {
+
+    let APIHidden = true
+    let FunctionsHidden = true
+
+    $("#APIButton").click(function() {
+      if (APIHidden) {
+        // Toggle hidden class and make visible, then change button text
+        $("#APISection").removeAttr('hidden')
+        $("#APIButton").text("Hide")
+      } else { //Else give it the hidden attribute and change button text
+        $("#APISection").attr('hidden', true)
+        $("#APIButton").text("Show")
+      }
+      //Toggle boolean of hidden to the opposite
+      APIHidden = !APIHidden
+    })
+
+    $("#FunctionsButton").click(function() {
+      if (FunctionsHidden) {
+        $("#FunctionsSection").removeAttr('hidden')
+        $("#FunctionsButton").text("Hide")
+      } else {
+        $("#FunctionsSection").attr('hidden', true)
+        $("#FunctionsButton").text("Show")
+      }
+      FunctionsHidden = !FunctionsHidden
+    })
+
+  })
+ 
+</script>
+
+
+SESSION THREE
+
+<div class="sessionContent">
+          <h2>Theory about variables (var vs let & const)</h2>
+          <p>
+            Var outdated because it caused errors since it was a variable that had global access, 
+            so major programs and having vars would result in major errors. Therefore we now use let & const. 
+            Let is mutable and can be changed throughout its lifespan, but a const is immutable, and can not be changed once assigned.
+          </p>
+        </div>
+
+        <div class="sessionContent">
+          <h2>Type Coercion</h2>
+          <p>
+            When programming in Javascript, you have to know the difference between == and ===.
+            When using double == we’re comparing the values of whatever is on the sides of the equal signs. 
+            For instance, when comparing the string “5” and the number 5 i.e: <br>
+            <img src="/imgs/TypeCoercion1.PNG" alt="" class="centerImage"> <br>
+            This will evaluate to true, because the actual value inside each is 5, 
+            but in programs it's risky to have this kind of loose evaluation, therefore we’d like to 
+            compare both to value AND to the data type, so we make sure that they’re actually the same. 
+            Therefore we use triple equal signs “===” to both compare by value & data type. <br>
+            <img src="/imgs/TypeCoercion2.PNG" alt="" class="centerImage"> <br>
+            Now this will evaluate to false, even though we didn't change anything BUT add another equal sign. 
+            Using triple equals sign is the right way to program with Javascript, since both the programmer 
+            and the computer should be able to tell data types apart, and using === makes sure 
+            both you and the computer do exactly that.
+          </p>
+        </div>
+
+        <div class="sessionContent">
+          <h2>NPM (Node Package Manager)</h2>
+          <p>
+            NPM er hvad Node.js anvender som package manager, og bruges til at hente og installere dependencies 
+            til pakker man godt vil anvende i ens kode. Såsom når vi indtaster <em>“npm install express”</em> i terminalen, 
+            dermed henter NPM de nødvendige filer indenfor Express frameworket som vi har behov for, for at 
+            kunne anvende Express i vores projekt.
+          </p>
+        </div>
+
+        <div class="sessionContent">
+          <h2>Nodemon</h2>
+          <p>
+            Nodemon is a build tool we install, and makes it automatic to shutdown and setup the listening server, 
+            so that we don't have to do it ourselves. Nodemon is activated in the terminal by typing <em>"nodemon [file]"</em>
+          </p>
+        </div>
+
+    
+
+    SESSION FOUR
+
+    <div class="sessionContent">
+          <h2>Functional Loops</h2>
+          <p>
+            <img src="/imgs/FunctionalLoops.PNG" alt=""> <br>
+            In this example we use the .map() method, where we console log each element inside the map. 
+            So it’s sort of a minimized for each loop. 
+          </p>
+        </div>
+
+        <div class="sessionContent">
+          <h2>URL Anatomy</h2>
+          <p>
+            <img src="/imgs/URLAnatomy.PNG" alt="" class="centerImage">
+            <img src="/imgs/URLExample.PNG" alt="" class="centerImage">
+            This GET method will for instance be able to tell specifics about the URL, 
+            even though our URL can be completely randomized (sorta). :id and :title tells us 
+            that we should expect any value at these parts of the URL, though these values should make 
+            sense in a context of what's beforehand in the URL. For instance if we’re hitting the 
+            endpoint /users/:id we would expect id to be a number, or if the endpoint was /users/:name 
+            we should expect a string, because the scenario is (most likely) a search in the users via a name
+          </p>
+        </div>
+
+        <div class="sessionContent">
+          <h2>Receiving data in Express</h2>
+          <p>
+            With the Express framework we can fast and efficiently create methods in our app.js file 
+            for receiving various POST calls, these are written, for instance
+            <img src="/imgs/ExpressDataReceiving.PNG" alt="" class="centerImage">
+            Here we are ready to receive data at endpoint /whatever, where we expect to receive some sort of 
+            data packed into the req variable of the method. In this case we just respond with the JSON object, as a JSON object. <br>
+            <img src="/imgs/ExpressPostmanExample.PNG" alt="" id="postmanExample"> <br>
+            Here we send the POST call through Postman (since we don't have a form for our site)
+            <ol>
+              <li>First we click “Body”.</li>
+              <li>Then we click “raw”.</li>
+              <li>Then change the format to JSON.</li>
+              <li>Next we write our JSON object, the keys have to be within quotation marks.</li>
+              <li>Click send.</li>
+              <li>Lastly we can see the response from the server, which in our case was the object we sent to the server in the first case.</li>
+            </ol>
+          </p>
+        </div>
+
+
+
+    SESSION FIVE
+
+    <div class="sessionContent">
+          <h2>How to serve .html files</h2>
+          <p>
+            Html files are always stored inside a folder called ‘public’ when working with Node.js. 
+            Therefore we create a folder called ‘public’ inside of the root folder. In this public folder we create .html files 
+            for various paths and serving. After this is done, we can make a path inside our app.js file 
+            for serving the necessary .html file, in this case the welcome.html file.
+            <img src="/imgs/serveHtml.PNG" alt="" class="centerImage">
+            Visual Studio Code can also create a HTML boilerplate for us, just make a new .html file 
+            and type html, then select html 5, and thus we have a boilerplate.
+          </p>
+        </div>
