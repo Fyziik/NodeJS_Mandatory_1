@@ -6,6 +6,7 @@ const mongo =  require('mongodb')
 const mongoClient = mongo.MongoClient
 const url = "mongodb://localhost:27017/testDB"
 let lightmode = true
+let themeButtonText = "Darkmode"
 
 // Make imgs folder servable, and set view engine to ejs for partials & views to be able to render
 app.use("/imgs", express.static(__dirname + '/imgs'))
@@ -19,6 +20,11 @@ const port = 8080
 //For changing between light and dark mode
 app.get("/changeTheme", (req, res) => {
     lightmode = !lightmode
+    if (lightmode) {
+        themeButtonText = "Darkmode"
+    } else {
+        themeButtonText = "Lightmode"
+    }
     mongoClient.connect(url, function(err, db) {
         if (err) throw err;
         const dbo = db.db("mandatoryDB");
@@ -26,7 +32,7 @@ app.get("/changeTheme", (req, res) => {
           if (err) throw err;
           db.close();
 
-          res.render('pages/index', {result: result, mode: lightmode})
+          res.render('pages/index', {result: result, mode: lightmode, themeButtonText: themeButtonText})
 
         });
       });
@@ -42,7 +48,7 @@ app.get("/", (req, res) => {
           if (err) throw err;
           db.close();
 
-          res.render('pages/index', {result: result, mode: lightmode})
+          res.render('pages/index', {result: result, mode: lightmode, themeButtonText: themeButtonText})
 
         });
       });
@@ -61,7 +67,7 @@ app.get("/session/:title", (req, res) => {
                 if (err) throw err;
                 db.close();
 
-                res.render('pages/session', {result: allResults, pageContent: result, mode: lightmode})
+                res.render('pages/session', {result: allResults, pageContent: result, mode: lightmode, themeButtonText: themeButtonText})
             })
         });
       });
