@@ -64,10 +64,16 @@
                 <p>H1 is used internally, so h1 should be avoided, instead use H2 for section 'titles'</p>
               </div>
               
+              <textarea class="form-control" name="pageContent" id="textArea" rows="12"></textarea>
 
-              <textarea class="form-control" name="pageContent" id="textArea" rows="3"></textarea>
+              <div class="form-group" style="width: 25%;">
+                <label for="tags"> <strong>Tags</strong> </label>
+                <input type="text" name="pageTags" class="form-control" id="tags" placeholder="Functions">
+              </div>
+
             </div>
           </form>
+          <div id="showTags" hidden style="margin-bottom: 1%;"></div>
           <button id="submitButton" class="btn btn-primary" style="font-size: 1.2rem;">Submit</button>
         </div>
 
@@ -81,14 +87,30 @@
 <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
 
 <script>
+  let tagsList = []
+  //Tags section
+  $('#tags').keypress((e) => {
+
+    if (e.key === "Enter") {
+      const inputVal = $('#tags').val()
+      tagsList.push(inputVal)
+      $('#showTags').attr('hidden', false)
+      $('#showTags').append(`<button class="btn btn-secondary" style="margin-right: 5px; margin-bottom: 5px">  ${inputVal} </button>` )
+      // Need to fix this line, wont clear input upon enter pressed
+      $('#tags').value = ""
+    }
+  })
+
   //Post for form data
   $('#submitButton').click( async () => {
-    let titlePage = $('#title').val()
-    let titleContent = $('#textArea').val()
+    const pageTitle = $('#title').val()
+    const pageContent = $('#textArea').val()
+    const pageTags = tagsList
 
-    let data = {
-      pageTitle : titlePage,
-      pageContent : titleContent
+    const data = {
+      pageTitle: pageTitle,
+      pageContent: pageContent,
+      pageTags: pageTags
     }
 
     console.log(data)

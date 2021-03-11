@@ -93,11 +93,10 @@ app.post("/newPage", (req, res) => {
         mongoClient.connect(url, function(err, db){
             if (err) throw err;
             const dbo = db.db("mandatoryDB");
-            let myObj = { title: title, titleRendered: titleRendered, content: req.body.pageContent }
+            let myObj = { title: title, titleRendered: titleRendered, content: req.body.pageContent, tags: req.body.pageTags }
 
             dbo.collection("pages").insertOne(myObj, function(err, db){
                 if (err) res.redirect('/');
-                console.log("1 document inserted")
                 db.close;
             });
         });

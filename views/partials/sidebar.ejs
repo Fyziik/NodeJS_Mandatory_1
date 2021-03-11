@@ -14,7 +14,10 @@
             <div class="accordion-body">
               
               <ul>
+                <% result[i].tags.forEach(function(tag) { %>
+                <li><strong> <%= tag %> </strong></li>
 
+                <% }) %>
               </ul>
 
               <a href="/session/<%=result[i].title%>" class="btn btn-primary">Go to page</a>
