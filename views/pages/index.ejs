@@ -1,5 +1,5 @@
 <!-- Head component -->
-<%- include('../partials/head') %>
+<%- include('../partials/head', {variant:'mode'}) %>
     
 <!-- Header -->
 <%- include('../partials/header') %>
@@ -10,7 +10,7 @@
     <!-- Sidebar partial -->
     <%- include('../partials/sidebar', {variant:'result'}) %>
     <!-- The "meat" of the pages -->
-    <div class="col">
+    <div class="col" id="content">
       <div>
 
         <h1>Landing page, should contain some sort of welcome and short description of what the task was, maybe, probably</h1>

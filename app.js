@@ -5,13 +5,33 @@ const cors = require('cors')
 const mongo =  require('mongodb')
 const mongoClient = mongo.MongoClient
 const url = "mongodb://localhost:27017/testDB"
+let lightmode = true
 
 // Make imgs folder servable, and set view engine to ejs for partials & views to be able to render
 app.use("/imgs", express.static(__dirname + '/imgs'))
+app.use("/css", express.static(__dirname + '/css'))
 app.use(express.json())
 app.use(cors())
 app.set('view engine', 'ejs')
 const port = 8080
+
+
+//For changing between light and dark mode
+app.get("/changeTheme", (req, res) => {
+    lightmode = !lightmode
+    mongoClient.connect(url, function(err, db) {
+        if (err) throw err;
+        const dbo = db.db("mandatoryDB");
+        dbo.collection("pages").find({}).toArray(function(err, result) {
+          if (err) throw err;
+          db.close();
+
+          res.render('pages/index', {result: result, mode: lightmode})
+
+        });
+      });
+    
+})
 
 //Index page serving
 app.get("/", (req, res) => {
@@ -20,10 +40,9 @@ app.get("/", (req, res) => {
         const dbo = db.db("mandatoryDB");
         dbo.collection("pages").find({}).toArray(function(err, result) {
           if (err) throw err;
-          console.log(result);
           db.close();
 
-          res.render('pages/index', {result: result})
+          res.render('pages/index', {result: result, mode: lightmode})
 
         });
       });
@@ -42,31 +61,14 @@ app.get("/session/:title", (req, res) => {
                 if (err) throw err;
                 db.close();
 
-                res.render('pages/session', {result: allResults, pageContent: result})
+                res.render('pages/session', {result: allResults, pageContent: result, mode: lightmode})
             })
         });
       });
     
 })
 
-
-//Generate page from title
-app.get("/pages/:title", (req, res) => {
-
-    mongoClient.connect(url, function(err, db) {
-        if (err) throw err;
-        let dbo = db.db("mandatoryDB");
-        let query = { title: req.params.title };
-        dbo.collection("pages").find(query).toArray(function(err, result) {
-          if (err) throw err;
-          console.log(result);
-          res.render("pages/session", {result: result})
-          db.close();
-        });
-      }); 
-
-})
-
+//Page for new page creation
 app.get("/addNewPage", (req, res) => {
     mongoClient.connect(url, function(err, db) {
         if (err) throw err;
@@ -75,13 +77,13 @@ app.get("/addNewPage", (req, res) => {
           if (err) throw err;
           db.close();
 
-          res.render('pages/sessionAdd', {result: result})
+          res.render('pages/sessionAdd', {result: result, mode: lightmode})
 
         });
       });
 })
 
-//New page for creating new pages via form page
+//POST for adding a new page
 //TODO Make title property in DB unique, so there wont be duplicate sites
 app.post("/newPage", (req, res) => {
     if (req.body.pageTitle !== "" && req.body.pageContent !== "") {
@@ -101,24 +103,6 @@ app.post("/newPage", (req, res) => {
             });
         });
     }
-})
-
-
-//Find all pages, currently just for inspecting data purposes
-app.get("/pages", (req, res) => {
-
-    mongoClient.connect(url, function(err, db) {
-        if (err) throw err;
-        const dbo = db.db("mandatoryDB");
-        dbo.collection("pages").find({}).toArray(function(err, result) {
-          if (err) throw err;
-          console.log(result);
-          db.close();
-
-          res.render("pages/testing", {result: result})
-
-        });
-      });
 })
 
 //Delete collection of pages for a clean slate

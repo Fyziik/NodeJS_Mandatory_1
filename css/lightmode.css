@@ -1,0 +1,58 @@
+.footer {
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    background-color: lightgray;
+    color: white;
+    text-align: center;
+  }
+
+  #navbar {
+    background: rgb(201, 201, 201);
+    }
+
+    .navbar-brand {
+        color: black;
+    }
+
+    .navbar-brand:hover {
+        color: black;
+    }
+
+  .row {
+      width: 100%;
+  }
+
+  .sidebarUL {
+      font-weight: 500;
+  }
+
+  .contentSection {
+      border-left: 4px black solid;
+  }
+
+  .sessionContent {
+      margin-left: 10px;
+      margin-bottom: 40px;
+  }
+
+  #content {
+      padding-bottom: 50px;
+  }
+
+  .centerImage {
+      display: block;
+      margin-left: auto;
+      margin-right: auto;
+      margin-top: 2%;
+      width: 25%;
+  }
+
+  #postmanExample {
+      display: block;
+      margin-left: auto;
+      margin-right: auto;
+      margin-top: 2%;
+      width: 60%;
+  }

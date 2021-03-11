@@ -6,7 +6,7 @@
         <% result.forEach(function(results) { %>
         <div class="accordion-item">
           <h2 class="accordion-header" id="heading<%=result[i].title%>">
-            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse<%=result[i].title%>" aria-expanded="true" aria-controls="collapse<%=result[i].title%>">
+            <button class="accordion-button collapsed sidebar-title" type="button" data-bs-toggle="collapse" data-bs-target="#collapse<%=result[i].title%>" aria-expanded="true" aria-controls="collapse<%=result[i].title%>">
               <%= result[i].titleRendered %>
             </button>
           </h2>

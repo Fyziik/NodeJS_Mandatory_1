@@ -1,0 +1,84 @@
+#bodyOverlay {
+    background: rgb(15, 15, 15);
+}
+
+#navbar {
+    background: rgb(30, 30, 30);
+}
+
+.navbar-brand {
+    color: white;
+}
+
+.navbar-brand:hover {
+    color: white;
+}
+
+
+.footer {
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    background: rgb(30, 30, 30);
+    color: white;
+    text-align: center;
+  }
+
+  #accordionExample {
+      color: rgb(255, 255, 255);
+      background: rgb(30, 30, 30);
+  }
+
+  .sidebar-title {
+      color: rgb(255, 255, 255);
+  }
+
+  .accordion-button:focus {
+      border: none;
+      outline: none;
+      box-shadow: none;
+  }
+
+  .accordion-button:not(.collapsed) {
+    color: rgb(255, 255, 255);
+    background: rgb(30, 30, 30);
+  }
+
+  .row {
+      width: 100%;
+  }
+
+  .sidebarUL {
+      font-weight: 500;
+  }
+
+  .contentSection {
+      border-left: 4px black solid;
+  }
+
+  .sessionContent {
+      margin-left: 10px;
+      margin-bottom: 40px;
+  }
+
+  #content {
+      padding-bottom: 50px;
+      color: white;
+  }
+
+  .centerImage {
+      display: block;
+      margin-left: auto;
+      margin-right: auto;
+      margin-top: 2%;
+      width: 25%;
+  }
+
+  #postmanExample {
+      display: block;
+      margin-left: auto;
+      margin-right: auto;
+      margin-top: 2%;
+      width: 60%;
+  }

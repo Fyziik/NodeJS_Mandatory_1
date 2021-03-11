@@ -1,4 +1,4 @@
-<nav class="navbar navbar-light bg-light">
+<nav class="navbar" id="navbar">
     <div class="container-fluid">
       <a class="navbar-brand" href="/" style="margin-left: 45%;">
         <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-book" viewBox="0 0 16 16">
@@ -6,8 +6,16 @@
           </svg>
         <span style="font-size: 1.5rem; font-weight: 800;">Learn.js</span>
       </a>
-
+      <button class="btn btn-dark" id="themeButton">Darkmode</button>
       <a href="/addNewPage"><button class="btn btn-primary">Add new page</button></a>
 
     </div>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+
+    <script>
+      $('#themeButton').click( () => {
+        window.location = "/changeTheme"
+      })
+    </script>
 </nav>

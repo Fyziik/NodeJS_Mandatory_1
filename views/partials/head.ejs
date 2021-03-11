@@ -5,57 +5,16 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">
+    <% console.log(mode) %>
+    <% if (mode) { %>
+        <!-- Load light mode -->
+        <link rel="stylesheet" href="../../css/lightmode.css">
+    <% } else { %>
+        <!-- Load dark mode -->
+        <link rel="stylesheet" href="../../css/darkmode.css">
+    <% } %>
+
     <title>Learn.js</title>
 
-    <style>
-        .footer {
-          position: fixed;
-          left: 0;
-          bottom: 0;
-          width: 100%;
-          background-color: lightgray;
-          color: white;
-          text-align: center;
-        }
-
-        .row {
-            width: 100%;
-        }
-
-        .sidebarUL {
-            font-weight: 500;
-        }
-
-        .contentSection {
-            border-left: 4px black solid;
-        }
-
-        .sessionContent {
-            margin-left: 10px;
-            margin-bottom: 40px;
-        }
-
-        #content {
-            padding-bottom: 50px;
-        }
-
-        .centerImage {
-            display: block;
-            margin-left: auto;
-            margin-right: auto;
-            margin-top: 2%;
-            width: 25%;
-        }
-
-        #postmanExample {
-            display: block;
-            margin-left: auto;
-            margin-right: auto;
-            margin-top: 2%;
-            width: 60%;
-        }
-
-    </style>
-
 </head>
-<body>
+<body id="bodyOverlay">
