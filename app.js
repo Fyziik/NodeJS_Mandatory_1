@@ -340,7 +340,7 @@ app.get("/", (req, res) => {
 //Session page serving from various IDs
 //This method will look through the pagesDatabase variable (holding all of the pages) and serve both the entire array of pages AND the specific page
 //OPTIMIZED
-app.get("/session/:title", (req, res) => {
+app.get("/pages/:title", (req, res) => {
     const title = req.params.title
     const allResults = pagesDatabase
     const result = pagesDatabase.filter(element => element.title === title)
@@ -359,7 +359,7 @@ app.get("/addNewPage", (req, res) => {
 //POST for adding a new page
 //OPTIMIZED
 //TODO Make title property in DB unique, so there wont be duplicate sites
-app.post("/newPage", (req, res) => {
+app.post("/pages", (req, res) => {
     if (req.body.pageTitle !== "" && req.body.pageContent !== "") {
 
         let title = req.body.pageTitle
