@@ -1,0 +1,75 @@
+<!-- head component -->
+<%- include('../partials/head') %>
+
+<!-- Header -->
+<%- include('../partials/header', {variant:'themeButtonText'}) %>
+
+<!-- Content -->
+<div class="row">
+    <!-- Sidebar partial -->
+    <%- include('../partials/sidebar', {variant:'result'}) %>
+    <!-- The "meat" of the pages -->
+    <div class="col" id="content">
+      <div>
+
+        <h1 style="margin-left: 22%;"> Python integration with node </h1>
+
+
+        <div class="row">
+            <div class="col-3"></div>
+
+            <div class="col">
+                Base <br>
+                <input type="number" id="baseInput">   
+            </div>
+
+
+            <div class="col">
+                Powered <br>
+                <input type="number" id="poweredInput">   
+            </div>
+
+            <div class="col-5"></div>
+        </div>
+    
+        <input type="text" disabled value='<%= pythonResponse %>' id="result" style="margin-left: 29.5%; margin-top: 2%;">
+
+        <button class="btn btn-primary" id="submitButton" >Calculate</button>
+    
+        
+
+      </div>
+    </div>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+
+<script>
+
+$('#submitButton').click( async () => {
+    const base = $('#baseInput').val()
+    const pow = $('#poweredInput').val()
+
+    const data = {
+      base: base,
+      pow: pow
+    }
+
+    console.log(data)
+
+    await fetch("http://localhost:8080/python", {
+      method: 'POST',
+      body: JSON.stringify(data),
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    });
+    setInterval(() => {
+          location.reload()
+    }, 50)
+  })
+
+</script>
+
+<!-- Footer Component -->
+<%- include('../partials/footer') %>

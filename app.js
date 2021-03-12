@@ -1,12 +1,14 @@
 const express = require('express')
 const app = express()
 const cors = require('cors')
+const {spawn} = require('child_process')
 
 const mongo =  require('mongodb')
 const mongoClient = mongo.MongoClient
 const url = "mongodb://localhost:27017/testDB"
 let lightmode = true
 let themeButtonText = "Darkmode"
+let pythonResponse = 0
 
 // Make imgs folder servable, and set view engine to ejs for partials & views to be able to render
 app.use("/imgs", express.static(__dirname + '/imgs'))
@@ -320,7 +322,6 @@ app.get("/loadDatabase", (req, res) => {
 })
 
 //For changing between light and dark mode
-//OPTIMIZED
 app.get("/changeTheme", (req, res) => {
     lightmode = !lightmode
     if (lightmode) {
@@ -332,14 +333,11 @@ app.get("/changeTheme", (req, res) => {
 })
 
 //Index page serving
-//OPTIMIZED
 app.get("/", (req, res) => {
     res.render('pages/index', {result: pagesDatabase, mode: lightmode, themeButtonText: themeButtonText})
 })
 
 //Session page serving from various IDs
-//This method will look through the pagesDatabase variable (holding all of the pages) and serve both the entire array of pages AND the specific page
-//OPTIMIZED
 app.get("/pages/:title", (req, res) => {
     const title = req.params.title
     const allResults = pagesDatabase
@@ -351,13 +349,11 @@ app.get("/pages/:title", (req, res) => {
 })
 
 //Page for new page creation
-//OPTIMIZED
 app.get("/addNewPage", (req, res) => {
     res.render('pages/sessionAdd', {result: pagesDatabase, mode: lightmode, themeButtonText: themeButtonText})
 })
 
 //POST for adding a new page
-//OPTIMIZED
 //TODO Make title property in DB unique, so there wont be duplicate sites
 app.post("/pages", (req, res) => {
     if (req.body.pageTitle !== "" && req.body.pageContent !== "") {
@@ -382,7 +378,6 @@ app.post("/pages", (req, res) => {
 })
 
 //Delete collection of pages for a clean slate
-//OPTIMIZED
 app.delete("/pages", (req, res) => {
 
     mongoClient.connect(url, function(err, db) {
@@ -398,7 +393,6 @@ app.delete("/pages", (req, res) => {
 })
 
 //Delete single page via title
-//OPTIMIZED
 app.delete("/pages/:title", (req, res) => {
 
     const title = req.params.title
@@ -412,6 +406,34 @@ app.delete("/pages/:title", (req, res) => {
       pagesDatabase = pagesDatabase.filter(element => element.title !== title)
 })
 
+//Retrieve Python calculator page
+app.get("/python", (req, res) => {
+  res.render('pages/python', {result: pagesDatabase, mode: lightmode, themeButtonText: themeButtonText, pythonResponse: pythonResponse})
+})
+
+//Post request with the inserted values at the python page, this connects with the python script, runs it, and the value is returned to the python page in the result box
+app.post("/python", (req, res) => {
+
+  const toCalculate = [
+    'test.py',
+    req.body.base,
+    req.body.pow
+  ]
+
+  let dataToSend;
+
+  const python = spawn('python', toCalculate)
+
+  python.stdout.on('data', function(data) {
+    pythonResponse = Number(data.toString())
+    res.render('pages/python', { result: pagesDatabase, mode: lightmode, themeButtonText: themeButtonText, pythonResponse: pythonResponse })
+  })
+
+  python.on('close', (code) => {
+    console.log(`child process close all stdio with code ${code}`)
+  })
+
+})
 
 app.listen(port, (error) => {
     if (error) {

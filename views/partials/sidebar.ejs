@@ -1,7 +1,20 @@
 <div class="col-2">
     <div class="accordion" id="accordionExample">
-        <!-- TEMPLATE -->
+      <div class="accordion-item">
+        <h2 class="accordion-header" id="headingPython">
+          <button class="accordion-button collapsed sidebar-title" type="button" data-bs-toggle="collapse" data-bs-target="#collapsePython" aria-expanded="true" aria-controls="collapsePython">
+            Python Integration Example
+          </button>
+        </h2>
+        <div id="collapsePython" class="accordion-collapse collapse" aria-labelledby="headingPython" data-bs-parent="#accordionExample">
+          <div class="accordion-body">
+            This calculator is a small example of how you can integrate another programming language into your node programs, in this case a Python script <br>
+            <a href="/python" class="btn btn-primary">Go to page</a>
+          </div>
+        </div>
+      </div>
 
+        <!-- TEMPLATING -->
         <% let i = 0 %>
         <% result.forEach(function(results) { %>
         <div class="accordion-item">
