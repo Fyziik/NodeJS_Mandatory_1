@@ -441,7 +441,7 @@ app.post("/python", (req, res) => {
 
 })
 
-app.listen(port, (error) => {
+app.listen(process.env.PORT || port, (error) => {
     if (error) {
         console.log("Error occured: " + error)
     } else {
