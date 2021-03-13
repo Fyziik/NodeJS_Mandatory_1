@@ -88,3 +88,17 @@
       margin-top: 2%;
       width: 60%;
   }
+
+  canvas {
+    background: rgb(15, 15, 15); 
+    border-bottom: gray 2px solid;
+  }
+
+  #gameLink:hover {
+    cursor: default;
+  }
+
+  #gameLink {
+    text-decoration: none;
+    color: white;
+  }

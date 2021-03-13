@@ -19,6 +19,7 @@ Bonus session can contain:
 - EJS
 - How to serve static files
 - MongoDB
+- Python integration
 
 
 

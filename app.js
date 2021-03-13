@@ -411,6 +411,11 @@ app.get("/python", (req, res) => {
   res.render('pages/python', {result: pagesDatabase, mode: lightmode, themeButtonText: themeButtonText, pythonResponse: pythonResponse})
 })
 
+//Retrieve game page
+app.get("/game", (req, res) => {
+  res.render('pages/game', {result: pagesDatabase, mode: lightmode, themeButtonText: themeButtonText})
+})
+
 //Post request with the inserted values at the python page, this connects with the python script, runs it, and the value is returned to the python page in the result box
 app.post("/python", (req, res) => {
 

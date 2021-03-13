@@ -59,3 +59,17 @@
       margin-top: 2%;
       width: 60%;
   }
+
+  canvas {
+    background: #eee; 
+    border-bottom: gray 2px solid;
+  }
+
+  #gameLink:hover {
+    cursor: default;
+  }
+
+  #gameLink {
+    text-decoration: none;
+    color: black;
+  }
