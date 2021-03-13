@@ -15,7 +15,7 @@
 
     <script>
       $('#themeButton').click( () => {
-        fetch("http://localhost:8080/changeTheme", {
+        fetch("/changeTheme", {
           method: 'GET'
         });
         setInterval(() => {
