@@ -5,7 +5,7 @@ const {spawn} = require('child_process')
 
 const mongo =  require('mongodb')
 const mongoClient = mongo.MongoClient
-const url = "mongodb://localhost:27017/testDB"
+const url = "mongodb+srv://Fyziik:Kagemand1@cluster0.vxa4u.mongodb.net/Cluster0?retryWrites=true&w=majority"
 let lightmode = true
 let themeButtonText = "Darkmode"
 let pythonResponse = 0
@@ -319,6 +319,7 @@ app.get("/loadDatabase", (req, res) => {
           tags: [ 'How to serve .html files' ]
         }
       ]
+      res.redirect("/")
 })
 
 //For changing between light and dark mode
