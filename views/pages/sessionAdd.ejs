@@ -130,7 +130,13 @@
         'Content-Type': 'application/json'
       }
     });
-    window.location = '/'
+    
+    setInterval(() => {
+      fetch("https://mandatory-assignment-nodejs.herokuapp.com/", {
+            method: 'GET'
+      });
+    }, 150)
+    
   })
 
   function insertAtCaret(areaId, text) {
