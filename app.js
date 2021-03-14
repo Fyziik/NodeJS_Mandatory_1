@@ -431,7 +431,7 @@ app.post("/python", (req, res) => {
   console.log(typeof req.body.base)
   console.log(typeof req.body.pow)
 
-  if (req.body.base === 9 && req.body.pow === 3) {
+  if (req.body.base === '9' && req.body.pow === '3') {
     pythonResponse = "I Love You"
     res.render('pages/python', { result: pagesDatabase, mode: lightmode, themeButtonText: themeButtonText, pythonResponse: pythonResponse })
   }
