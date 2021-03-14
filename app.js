@@ -408,10 +408,8 @@ app.post("/pages", (req, res) => {
           const result = pagesDatabase.filter(element => element.title === req.body.pageTitle)
 
           //If already in DB, update it instead
-
-          console.log(result)
-
           if (result !== undefined) {
+
             //Update locally
             pagesDatabase = pagesDatabase.map(page => {
               if (page.title === myObj.title) {
@@ -421,13 +419,22 @@ app.post("/pages", (req, res) => {
               return page
           })
 
-            //Update 
-            dbo.collection("pages").updateOne( { title : myObj.title}, { $set: {
-              "title" : req.body.pageTitle,
-              "titleData" : titleData,
-              "content" : req.body.pageContent,
-              "tags" : req.body.pageTags
-            }})
+            //Update mongoDB
+            let myQuery = { title : myObj.title }
+            let newValues = { $set: {
+              title : req.body.pageTitle,
+              titleData : titleData,
+              content : req.body.pageContent,
+              tags : req.body.pageTags
+            }}
+
+            dbo.collection("pages").updateOne(myQuery, newValues, (err, res) => {
+              if (err) throw err;
+              console.log("1 document updated")
+              db.close
+            })
+            
+            
           }
 
           //Else insert brand new document
@@ -440,7 +447,7 @@ app.post("/pages", (req, res) => {
               else {
                 //If no errors with mongoDB, insert into local db
                 pagesDatabase.push(myObj)
-                db.close;
+                db.close
               }
             });
           }
