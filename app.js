@@ -431,9 +431,6 @@ app.post("/pages", (req, res) => {
               tags : ["TMP"]
             }}
 
-            console.log(myQuery)
-            console.log(newValues)
-
             dbo.collection("pages").updateOne(myQuery, newValues, (err, res) => {
               if (err) throw err;
               console.log("1 document updated")
@@ -458,7 +455,7 @@ app.post("/pages", (req, res) => {
             });
           }
 
-          res.render('pages/index', {result: pagesDatabase, mode: lightmode, themeButtonText: themeButtonText, loggedIn: loggedIn})
+          console.log(pagesDatabase)
 
       });
   }

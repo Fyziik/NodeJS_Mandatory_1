@@ -145,7 +145,11 @@
       headers: {
         'Content-Type': 'application/json'
       }
-    });
+    }).then(
+      setInterval(() => {
+        window.location = '/'
+      }, 250)
+    );
     
     
   })
