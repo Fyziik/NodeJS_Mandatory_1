@@ -36,6 +36,7 @@
               <a href="/pages/<%=result[i].title%>" class="btn btn-primary">Go to page</a>
               <% if (loggedIn) { %>
               <a href="/edit/<%=result[i].title%>" class="btn btn-warning">Edit</a>
+              <a id="<%=result[i].title%>" class="btn btn-danger">Edit</a>
               <% } %>
             </div>
           </div>
@@ -45,3 +46,13 @@
 
       </div>
 </div>
+
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+<script>
+
+$('#<%=result[i].title%>').on('click', () => {
+  alert("You clicked <%=result[i].title%>")
+})
+  
+</script>
