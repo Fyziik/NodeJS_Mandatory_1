@@ -409,7 +409,7 @@ app.post("/pages", (req, res) => {
 
           //If already in DB, update it instead
 
-          console.log(reuslt)
+          console.log(result)
 
           if (result !== undefined) {
             //Update locally
