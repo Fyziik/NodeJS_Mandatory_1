@@ -12,7 +12,7 @@ let lightmode = true
 let themeButtonText = "Darkmode"
 let pythonResponse = 0
 
-let loggedIn = false
+let loggedIn = true
 let loggedInUsername
 
 // Make imgs folder servable, and set view engine to ejs for partials & views to be able to render
@@ -365,19 +365,38 @@ app.get("/pages/:title", (req, res) => {
 
     // allResults = all pages, result = single page looking for, mode = light or dark mode, themeButtonText = text on button depending on state
     res.render('pages/session', {result: allResults, pageContent: result, mode: lightmode, themeButtonText: themeButtonText, loggedIn: loggedIn})
+})
+
+//Session editi
+app.get("/edit/:title", (req, res) => {
+  const title = req.params.title
+  console.log(title)
+
+  //Find page for insertion into the editor for easier use
+  const result = pagesDatabase.filter(element => element.title === title)
+
+  if (loggedIn) {
     
+    res.render('pages/sessionAdd', {resultToInsert: result, result: pagesDatabase, mode: lightmode, themeButtonText: themeButtonText, loggedIn: loggedIn})
+  } 
+  res.redirect('/')
+
 })
 
 //Page for new page creation
 app.get("/addNewPage", (req, res) => {
     if (loggedIn) {
-      res.render('pages/sessionAdd', {result: pagesDatabase, mode: lightmode, themeButtonText: themeButtonText, loggedIn: loggedIn})
+      const emptyObj = {
+        title: "",
+        content: ""
+      }
+
+      res.render('pages/sessionAdd', {resultToInsert: emptyObj, result: pagesDatabase, mode: lightmode, themeButtonText: themeButtonText, loggedIn: loggedIn})
     }
     res.redirect('/')
 })
 
 //POST for adding a new page
-//TODO Make title property in DB unique, so there wont be duplicate sites
 app.post("/pages", (req, res) => {
   if (req.body.pageTitle !== "" && req.body.pageContent !== "") {
 

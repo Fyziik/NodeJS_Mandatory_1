@@ -34,6 +34,9 @@
               </ul>
 
               <a href="/pages/<%=result[i].title%>" class="btn btn-primary">Go to page</a>
+              <% if (loggedIn) { %>
+              <a href="/edit/<%=result[i].title%>" class="btn btn-warning">Edit</a>
+              <% } %>
             </div>
           </div>
         </div>

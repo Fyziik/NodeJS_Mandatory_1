@@ -20,7 +20,7 @@
                 <form style="margin-bottom: 2%;">
                   <div class="form-group" style="margin-bottom: 2%;">
                     <label for="title"> <strong>Page Title</strong> </label>
-                    <input type="text" name="pageTitle" class="form-control" id="title" placeholder="Session x">
+                    <input type="text" name="pageTitle" class="form-control" id="title" value="<%= resultToInsert[0].title %>">
                   </div>
                   <div class="form-group">
                     <label for="textArea"> <strong>Page Content</strong> (HTML based) </label>
@@ -67,7 +67,7 @@
                       <p>H1 is used internally, so h1 should be avoided, instead use H2 for section 'titles'</p>
                     </div>
                     
-                    <textarea class="form-control" name="pageContent" id="textArea" rows="12"></textarea>
+                    <textarea class="form-control" name="pageContent" id="textArea" rows="12"><%= resultToInsert[0].content %></textarea>
 
                     <div class="form-group" style="width: 25%;">
                       <label for="tags"> <strong>Tags</strong> </label>
