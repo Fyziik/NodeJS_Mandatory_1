@@ -15,6 +15,8 @@ let pythonResponse = 0
 let loggedIn = false
 let loggedInUsername
 
+let editPageOldTitle;
+
 // Make imgs folder servable, and set view engine to ejs for partials & views to be able to render
 app.use("/imgs", express.static(__dirname + '/imgs'))
 app.use("/css", express.static(__dirname + '/css'))
@@ -370,6 +372,7 @@ app.get("/pages/:title", (req, res) => {
 app.get("/edit/:title", (req, res) => {
   const title = req.params.title
   console.log(title)
+  editPageOldTitle = title
 
   //Find page for insertion into the editor for easier use
   const result = pagesDatabase.filter(element => element.title === title)
@@ -412,7 +415,7 @@ app.post("/pages", (req, res) => {
 
             //Update locally
             pagesDatabase = pagesDatabase.map(page => {
-              if (page.title === myObj.title) {
+              if (page.title === editPageOldTitle) {
                   const pageToReturn = {...myObj}
                   return {pageToReturn}
               }
@@ -420,7 +423,7 @@ app.post("/pages", (req, res) => {
           })
             
             //Update mongoDB
-            let myQuery = { title : myObj.title }
+            let myQuery = { title : editPageOldTitle }
             let newValues = { $set: {
               title : req.body.pageTitle,
               titleData : titleData,
