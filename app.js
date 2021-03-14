@@ -405,7 +405,7 @@ app.post("/pages", (req, res) => {
           const dbo = db.db("mandatoryDB");
           let myObj = { title: req.body.pageTitle, titleData: titleData, content: req.body.pageContent, tags: req.body.pageTags }
 
-          const result = pagesDatabase.filter(element => element.title === title)
+          const result = pagesDatabase.filter(element => element.title === req.body.pageTitle)
 
           //If already in DB, update it instead
 
