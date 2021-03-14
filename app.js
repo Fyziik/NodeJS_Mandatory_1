@@ -378,7 +378,7 @@ app.get("/addNewPage", (req, res) => {
 
 //POST for adding a new page
 //TODO Make title property in DB unique, so there wont be duplicate sites
-app.post("/pages", (req, res) => {
+app.post("/pages", (req, res, next) => {
   if (req.body.pageTitle !== "" && req.body.pageContent !== "") {
 
     titleData = req.body.pageTitle.replace(/\s/g, '');
