@@ -422,7 +422,12 @@ app.post("/pages", (req, res) => {
           })
 
             //Update 
-            dbo.collection("pages").updateOne( { title : myObj.title}, { $set: {myObj}})
+            dbo.collection("pages").updateOne( { title : myObj.title}, { $set: {
+              "title" : req.body.pageTitle,
+              "titleData" : titleData,
+              "content" : req.body.pageContent,
+              "tags" : req.body.pageTags
+            }})
           }
 
           //Else insert brand new document
