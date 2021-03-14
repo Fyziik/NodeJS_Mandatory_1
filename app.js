@@ -358,6 +358,7 @@ app.get("/", (req, res) => {
 app.get("/pages/:title", (req, res) => {
     const title = req.params.title
     const allResults = pagesDatabase
+    console.log(title)
     const result = pagesDatabase.filter(element => element.title === title)
 
     // allResults = all pages, result = single page looking for, mode = light or dark mode, themeButtonText = text on button depending on state
