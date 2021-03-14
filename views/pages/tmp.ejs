@@ -2,25 +2,30 @@
 <%- include('../partials/head') %>
 
 <!-- Header -->
-<%- include('../partials/header') %>
+<%- include('../partials/header', {variant:'themeButtonText'}) %>
 
 <!-- Content -->
-<div class="row" id="content">
+<div class="row">
     <!-- Sidebar partial -->
-    <%- include('../partials/sidebar') %>
+    <%- include('../partials/sidebar', {variant:'result'}) %>
     <!-- The "meat" of the pages -->
-    <div class="col">
+    <div class="col" id="content">
       <div>
 
         <!-- HTML TEXT GOES HERE -->
 
-        <h1 style="margin-left: 33.5%;">Bonus learning</h1>
+        <h1 style="margin-left: 29%;">Bonus learning</h1>
 
         <h2>EJS</h2>
 
         <h2>How to serve static files </h2>
 
         <h2>MongoDB</h2>
+
+        <h2>Python Integration</h2>
+
+        <h2>Deploying on Heroku</h2>
+        <img src="/imgs/HerokuDeployEnvVariables.png" alt="">
 
       </div>
     </div>

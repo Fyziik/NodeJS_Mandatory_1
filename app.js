@@ -430,17 +430,22 @@ app.post("/python", (req, res) => {
 
   let dataToSend;
 
-  const python = spawn('python', toCalculate)
+  if (req.body.base === 9 && req.body.base === 3) {
+    res.render('pages/python', { result: pagesDatabase, mode: lightmode, themeButtonText: themeButtonText, pythonResponse: "I Love You" })
+  }
+  else {
+    const python = spawn('python', toCalculate)
 
-  python.stdout.on('data', function(data) {
-    pythonResponse = Number(data.toString())
-    res.render('pages/python', { result: pagesDatabase, mode: lightmode, themeButtonText: themeButtonText, pythonResponse: pythonResponse })
-  })
+    python.stdout.on('data', function(data) {
+      pythonResponse = Number(data.toString())
 
-  python.on('close', (code) => {
-    console.log(`child process close all stdio with code ${code}`)
-  })
+      res.render('pages/python', { result: pagesDatabase, mode: lightmode, themeButtonText: themeButtonText, pythonResponse: pythonResponse })
+    })
 
+    python.on('close', (code) => {
+      console.log(`child process close all stdio with code ${code}`)
+    })
+  }
 })
 
 app.get("/tmp", (req, res) => {
