@@ -429,7 +429,7 @@ app.post("/pages", (req, res) => {
               title : req.body.pageTitle,
               titleData : titleData,
               content : req.body.pageContent,
-              tags : ["TMP"]
+              tags : req.body.pageTags
             }}
 
             dbo.collection("pages").updateOne(myQuery, newValues, (err, res) => {
