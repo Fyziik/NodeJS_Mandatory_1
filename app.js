@@ -428,8 +428,8 @@ app.post("/python", (req, res) => {
     req.body.pow
   ]
 
-  console.log(req.body.base)
-  console.log(req.body.pow)
+  console.log(typeof req.body.base)
+  console.log(typeof req.body.pow)
 
   if (req.body.base === 9 && req.body.pow === 3) {
     pythonResponse = "I Love You"
