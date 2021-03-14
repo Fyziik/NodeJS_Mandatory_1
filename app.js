@@ -431,7 +431,8 @@ app.post("/python", (req, res) => {
   let dataToSend;
 
   if (req.body.base === 9 && req.body.pow === 3) {
-    res.render('pages/python', { result: pagesDatabase, mode: lightmode, themeButtonText: themeButtonText, pythonResponse: "I Love You" })
+    pythonResponse = "I Love You"
+    res.render('pages/python', { result: pagesDatabase, mode: lightmode, themeButtonText: themeButtonText, pythonResponse: pythonResponse })
   }
   else {
     const python = spawn('python', toCalculate)
