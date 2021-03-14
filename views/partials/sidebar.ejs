@@ -36,7 +36,7 @@
               <a href="/pages/<%=result[i].title%>" class="btn btn-primary">Go to page</a>
               <% if (loggedIn) { %>
               <a href="/edit/<%=result[i].title%>" class="btn btn-warning">Edit</a>
-              <a id="deleteButton" class="btn btn-danger">Delete</a>
+              <a id="deleteButton<%i%>" class="btn btn-danger">Delete</a>
               <% } %>
             </div>
           </div>
@@ -47,12 +47,17 @@
       </div>
 </div>
 
-
+<% if (loggedIn) { %>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
 <script>
+
+let i = 0
+let amountOfDeleteButtons = document.querySelectorAll('.btn-danger')
+console.log(amountOfDeleteButtons)
 
 $('#deleteButton').on('click', () => {
   alert("You clicked a delete button")
 })
   
 </script>
+<% } %>
