@@ -8,7 +8,7 @@ const mongoClient = mongo.MongoClient
 const dbUsername = process.env.DB_USERNAME
 const dbPassword = process.env.DB_PASSWORD
 const url = `mongodb+srv://${dbUsername}:${dbPassword}@cluster0.vxa4u.mongodb.net/Cluster0?retryWrites=true&w=majority`
-let lightmode = true
+let lightmode = false
 let themeButtonText = "Darkmode"
 let pythonResponse = 0
 
@@ -376,7 +376,6 @@ app.get("/edit/:title", (req, res) => {
   const result = pagesDatabase.filter(element => element.title === title)
 
   if (loggedIn) {
-    
     res.render('pages/sessionAdd', {resultToInsert: result, result: pagesDatabase, mode: lightmode, themeButtonText: themeButtonText, loggedIn: loggedIn})
   } 
   res.redirect('/')
