@@ -443,7 +443,7 @@ app.post("/python", (req, res) => {
 
 })
 
-app.post("/tmp", (req, res) => {
+app.get("/tmp", (req, res) => {
   res.render('pages/tmp', {result: pagesDatabase, mode: lightmode, themeButtonText: themeButtonText})
 })
 
