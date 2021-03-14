@@ -29,7 +29,12 @@ const port = 8080
 // this happens on startup and is then saved locally in the 'pagesDatabase' variable, then updated appropiately during runtime
 let pagesDatabase
 let usersDatabase
-mongoClient.connect(url, function(err, db) {
+
+getPagesMongoDB()
+getUsersMongoDB()
+
+function getPagesMongoDB() {
+  mongoClient.connect(url, function(err, db) {
     if (err) throw err;
     const dbo = db.db("mandatoryDB");
     dbo.collection("pages").find({}).toArray(function(err, result) {
@@ -37,17 +42,22 @@ mongoClient.connect(url, function(err, db) {
       pagesDatabase = result
       db.close();
     });
-});
-
-mongoClient.connect(url, function(err, db) {
-  if (err) throw err;
-  const dbo = db.db("mandatoryDB");
-  dbo.collection("users").find({}).toArray(function(err, result) {
-    if (err) throw err;
-    usersDatabase = result
-    db.close();
   });
-});
+}
+
+function getUsersMongoDB() {
+  mongoClient.connect(url, function(err, db) {
+    if (err) throw err;
+    const dbo = db.db("mandatoryDB");
+    dbo.collection("users").find({}).toArray(function(err, result) {
+      if (err) throw err;
+      usersDatabase = result
+      db.close();
+    });
+  });
+}
+
+
 
 
 
@@ -413,16 +423,6 @@ app.post("/pages", (req, res) => {
           //If already in DB, update it instead
           if (result !== undefined) {
 
-            //Update locally
-            pagesDatabase = pagesDatabase.map(page => {
-              if (page.title === editPageOldTitle) {
-                  const pageToReturn = {...myObj}
-                  console.log(pageToReturn)
-                  return {pageToReturn}
-              }
-              return page
-          })
-            
             //Update mongoDB
             let myQuery = { title : editPageOldTitle }
             let newValues = { $set: {
@@ -437,7 +437,9 @@ app.post("/pages", (req, res) => {
               console.log("1 document updated")
               db.close
             })
-            
+
+            //Update locally
+            getPagesMongoDB()
             
           }
 
