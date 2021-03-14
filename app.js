@@ -379,10 +379,12 @@ app.get("/addNewPage", (req, res) => {
 app.post("/pages", (req, res) => {
   if (req.body.pageTitle !== "" && req.body.pageContent !== "") {
 
+    titleData = req.body.pageTitle.replace(/\s/g, '');
+
       mongoClient.connect(url, function(err, db){
           if (err) throw err;
           const dbo = db.db("mandatoryDB");
-          let myObj = { title: req.body.pageTitle, content: req.body.pageContent, tags: req.body.pageTags }
+          let myObj = { title: req.body.pageTitle, titleData: titleData, content: req.body.pageContent, tags: req.body.pageTags }
 
           dbo.collection("pages").insertOne(myObj, function(err, db){
               if (err) res.redirect('/');

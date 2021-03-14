@@ -1,7 +1,7 @@
 {
   "scripts": {
     "start": "node app.js",
-    "start-dev": "cross-env DB_USERNAME=xxx DB_PASSWORD=xxx nodemon app.js"
+    "start-dev": "cross-env DB_USERNAME= DB_PASSWORD= nodemon app.js"
   },
   "dependencies": {
     "body-parser": "^1.19.0",
