@@ -360,14 +360,13 @@ app.get("/", (req, res) => {
 app.get("/pages/:title", (req, res) => {
     const title = req.params.title
     const allResults = pagesDatabase
-    console.log(title)
     const result = pagesDatabase.filter(element => element.title === title)
 
     // allResults = all pages, result = single page looking for, mode = light or dark mode, themeButtonText = text on button depending on state
     res.render('pages/session', {result: allResults, pageContent: result, mode: lightmode, themeButtonText: themeButtonText, loggedIn: loggedIn})
 })
 
-//Session editi
+//Session editing
 app.get("/edit/:title", (req, res) => {
   const title = req.params.title
   console.log(title)
@@ -406,7 +405,27 @@ app.post("/pages", (req, res) => {
           const dbo = db.db("mandatoryDB");
           let myObj = { title: req.body.pageTitle, titleData: titleData, content: req.body.pageContent, tags: req.body.pageTags }
 
-          dbo.collection("pages").insertOne(myObj, function(err, db){
+          const result = pagesDatabase.filter(element => element.title === title)
+
+          //If already in DB, update it instead
+
+          if (result !== undefined) {
+            //Update locally
+            pagesDatabase = pagesDatabase.map(page => {
+              if (page.title === myObj.title) {
+                  const pageToReturn = {...myObj}
+                  return {pageToReturn}
+              }
+              return page
+          })
+
+            //Update 
+            dbo.collection("pages").updateOne( { title : myObj.title}, {myObj})
+          }
+
+          //Else insert brand new document
+          else {
+            dbo.collection("pages").insertOne(myObj, function(err, db){
               if (err) {
                 console.log(err); 
                 res.redirect('/');
@@ -416,9 +435,9 @@ app.post("/pages", (req, res) => {
                 pagesDatabase.push(myObj)
                 db.close;
               }
-              
-          });
-          
+            });
+          }
+
       });
   }
 })
