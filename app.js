@@ -418,7 +418,7 @@ app.post("/pages", (req, res) => {
               }
               return page
           })
-
+            
             //Update mongoDB
             let myQuery = { title : myObj.title }
             let newValues = { $set: {
@@ -427,6 +427,9 @@ app.post("/pages", (req, res) => {
               content : req.body.pageContent,
               tags : req.body.pageTags
             }}
+
+            console.log(myQuery)
+            console.log(newValues)
 
             dbo.collection("pages").updateOne(myQuery, newValues, (err, res) => {
               if (err) throw err;
