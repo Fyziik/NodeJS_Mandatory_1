@@ -373,6 +373,26 @@ app.get("/addNewPage", (req, res) => {
     res.redirect('/')
 })
 
+//POST for adding a new page
+//TODO Make title property in DB unique, so there wont be duplicate sites
+app.post("/pages", (req, res) => {
+  if (req.body.pageTitle !== "" && req.body.pageContent !== "") {
+
+      mongoClient.connect(url, function(err, db){
+          if (err) throw err;
+          const dbo = db.db("mandatoryDB");
+          let myObj = { title: req.body.pageTitle, content: req.body.pageContent, tags: req.body.pageTags }
+
+          dbo.collection("pages").insertOne(myObj, function(err, db){
+              if (err) res.redirect('/');
+              db.close;
+          });
+          //If no errors with mongoDB, insert into local db
+          pagesDatabase.push(myObj)
+      });
+  }
+})
+
 app.get("/login", (req, res) => {
   res.render('pages/login', {result: pagesDatabase, mode: lightmode, themeButtonText: themeButtonText, loggedIn: loggedIn})
 })
@@ -389,30 +409,6 @@ app.post("/login", (req, res) => {
     }
   });
   res.redirect('/')
-})
-
-//POST for adding a new page
-//TODO Make title property in DB unique, so there wont be duplicate sites
-app.post("/pages", (req, res) => {
-    if (req.body.pageTitle !== "" && req.body.pageContent !== "") {
-
-        let title = req.body.pageTitle
-        title = title.substr(0, 7) + title.substr(8, title.length)
-        let titleRendered = req.body.pageTitle
-
-        mongoClient.connect(url, function(err, db){
-            if (err) throw err;
-            const dbo = db.db("mandatoryDB");
-            let myObj = { title: title, titleRendered: titleRendered, content: req.body.pageContent, tags: req.body.pageTags }
-
-            dbo.collection("pages").insertOne(myObj, function(err, db){
-                if (err) res.redirect('/');
-                db.close;
-            });
-            //If no errors with mongoDB, insert into local db
-            pagesDatabase.push(myObj)
-        });
-    }
 })
 
 //Delete collection of pages for a clean slate
