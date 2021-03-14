@@ -129,13 +129,10 @@
       headers: {
         'Content-Type': 'application/json'
       }
-    });
+    }).then(
+      window.location = '/'
+    );
     
-    setInterval(() => {
-      fetch("https://mandatory-assignment-nodejs.herokuapp.com/", {
-            method: 'GET'
-      });
-    }, 150)
     
   })
 
