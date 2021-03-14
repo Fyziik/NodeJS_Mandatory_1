@@ -370,9 +370,9 @@ app.get("/pages/:title", (req, res) => {
 
 //Page for new page creation
 app.get("/addNewPage", (req, res) => {
-    if (loggedIn) {
+    //if (loggedIn) {
       res.render('pages/sessionAdd', {result: pagesDatabase, mode: lightmode, themeButtonText: themeButtonText, loggedIn: loggedIn})
-    }
+    //}
     res.redirect('/')
 })
 
