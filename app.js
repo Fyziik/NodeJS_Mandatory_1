@@ -430,7 +430,7 @@ app.post("/python", (req, res) => {
 
   let dataToSend;
 
-  if (req.body.base === 9 && req.body.base === 3) {
+  if (req.body.base === 9 && req.body.pow === 3) {
     res.render('pages/python', { result: pagesDatabase, mode: lightmode, themeButtonText: themeButtonText, pythonResponse: "I Love You" })
   }
   else {
