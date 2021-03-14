@@ -421,8 +421,8 @@ app.post("/pages", (req, res) => {
           const result = pagesDatabase.filter(element => element.title === req.body.pageTitle)
 
           //If already in DB, update it instead
-          console.log(result)
-          if (result !== []) {
+          console.log(result.length)
+          if (result.length === 0) {
 
             //Update mongoDB
             let myQuery = { title : editPageOldTitle }
