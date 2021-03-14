@@ -57,7 +57,7 @@ $('.btn-danger').click(async (e) => {
   const clickedTitle = e.target.id
 
   await fetch("https://mandatory-assignment-nodejs.herokuapp.com/pages/" + clickedTitle, {
-      method: 'POST'
+      method: 'DELETE'
     }).then(
       setInterval(() => {
         window.location = '/'
