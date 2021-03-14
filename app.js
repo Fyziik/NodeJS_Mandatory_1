@@ -422,7 +422,7 @@ app.post("/pages", (req, res) => {
 
           //If already in DB, update it instead
           console.log(result.length)
-          if (result.length === 0) {
+          if (result.length !== 0) {
 
             //Update mongoDB
             let myQuery = { title : editPageOldTitle }
