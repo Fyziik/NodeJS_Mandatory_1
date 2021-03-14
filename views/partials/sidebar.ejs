@@ -55,9 +55,13 @@ let i = 0
 let amountOfDeleteButtons = document.querySelectorAll('.btn-danger')
 console.log(amountOfDeleteButtons)
 
-$('#deleteButton').on('click', () => {
-  alert("You clicked a delete button")
-})
+for (let k = 0; k < amountOfDeleteButtons; k++) {
+  $(`'#deleteButton${k}'`).on('click', () => {
+  alert(`You clicked #${k}`)
+  })
+}
+
+
   
 </script>
 <% } %>
