@@ -51,15 +51,10 @@
 <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
 <script>
 
-let i = 0
-let amountOfDeleteButtons = document.querySelectorAll('.btn-danger')
-console.log(amountOfDeleteButtons)
+$('.btn-danger').click((e) => {
+  console.log(e)
+})
 
-for (let k = 0; k < amountOfDeleteButtons; k++) {
-  $(`'#deleteButton${k}'`).on('click', () => {
-  alert(`You clicked #${k}`)
-  })
-}
 
 
   
