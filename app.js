@@ -355,7 +355,6 @@ app.get("/changeTheme", (req, res) => {
 
 //Index page serving
 app.get("/", (req, res) => {
-  console.log(pagesDatabase)
     res.render('pages/index', {result: pagesDatabase, mode: lightmode, themeButtonText: themeButtonText, loggedIn: loggedIn})
 })
 
@@ -458,6 +457,8 @@ app.post("/pages", (req, res) => {
               }
             });
           }
+
+          res.render('pages/index', {result: pagesDatabase, mode: lightmode, themeButtonText: themeButtonText, loggedIn: loggedIn})
 
       });
   }
