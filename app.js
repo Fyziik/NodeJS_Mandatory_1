@@ -5,7 +5,9 @@ const {spawn} = require('child_process')
 
 const mongo =  require('mongodb')
 const mongoClient = mongo.MongoClient
-const url = "mongodb+srv://Fyziik:Kagemand1@cluster0.vxa4u.mongodb.net/Cluster0?retryWrites=true&w=majority"
+const dbUsername = process.env.DB_USERNAME
+const dbPassword = process.env.DB_PASSWORD
+const url = `mongodb+srv://${dbUsername}:${dbPassword}@cluster0.vxa4u.mongodb.net/Cluster0?retryWrites=true&w=majority`
 let lightmode = true
 let themeButtonText = "Darkmode"
 let pythonResponse = 0
