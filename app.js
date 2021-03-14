@@ -421,6 +421,8 @@ app.post("/pages", (req, res) => {
               }
               return page
           })
+
+          console.log(pagesDatabase)
             
             //Update mongoDB
             let myQuery = { title : editPageOldTitle }
