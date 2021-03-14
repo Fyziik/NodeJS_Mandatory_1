@@ -378,7 +378,7 @@ app.get("/addNewPage", (req, res) => {
 
 //POST for adding a new page
 //TODO Make title property in DB unique, so there wont be duplicate sites
-app.post("/pages", (req, res, next) => {
+app.post("/pages", (req, res) => {
   if (req.body.pageTitle !== "" && req.body.pageContent !== "") {
 
     titleData = req.body.pageTitle.replace(/\s/g, '');
@@ -389,17 +389,12 @@ app.post("/pages", (req, res, next) => {
           let myObj = { title: req.body.pageTitle, titleData: titleData, content: req.body.pageContent, tags: req.body.pageTags }
 
           dbo.collection("pages").insertOne(myObj, function(err, db){
-              if (err) {
-                if (err.code === 11000) {
-                  next(new Error('DUPLICATED TITLE'))
-                }
-              }
+              if (err) res.redirect('/');
               db.close;
           });
           //If no errors with mongoDB, insert into local db
           pagesDatabase.push(myObj)
       });
-      res.redirect('/')
   }
 })
 
