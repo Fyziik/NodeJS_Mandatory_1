@@ -8,11 +8,11 @@ const mongoClient = mongo.MongoClient
 const dbUsername = process.env.DB_USERNAME
 const dbPassword = process.env.DB_PASSWORD
 const url = `mongodb+srv://${dbUsername}:${dbPassword}@cluster0.vxa4u.mongodb.net/Cluster0?retryWrites=true&w=majority`
-let lightmode = false
+let lightmode = true
 let themeButtonText = "Darkmode"
 let pythonResponse = 0
 
-let loggedIn = true
+let loggedIn = false
 let loggedInUsername
 
 // Make imgs folder servable, and set view engine to ejs for partials & views to be able to render
