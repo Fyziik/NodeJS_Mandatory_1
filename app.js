@@ -417,6 +417,7 @@ app.post("/pages", (req, res) => {
             pagesDatabase = pagesDatabase.map(page => {
               if (page.title === editPageOldTitle) {
                   const pageToReturn = {...myObj}
+                  console.log(pageToReturn)
                   return {pageToReturn}
               }
               return page
