@@ -393,11 +393,14 @@ app.post("/pages", (req, res) => {
                 console.log(err); 
                 res.redirect('/');
               } 
-              db.close;
+              else {
+                //If no errors with mongoDB, insert into local db
+                pagesDatabase.push(myObj)
+                db.close;
+              }
               
           });
-          //If no errors with mongoDB, insert into local db
-          pagesDatabase.push(myObj)
+          
       });
   }
 })
