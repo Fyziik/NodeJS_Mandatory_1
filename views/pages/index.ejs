@@ -16,9 +16,8 @@
         <h1 style="margin-left: 13.5%;"> A page for learning Node.js and other stuff </h1>
         
         <h2>If the sidebar is empty</h2>
-        <p>This means you dont have any data in your mongoDB related to this page, therefore you either have to manually add new pages (top right button)
-          OR because I'm such a good guy (and its part of the mandatory assignment, but dont tell anyone), you can go to the endpoint /loadDatabase, and
-          a bunch of new pages will be available for you in the sidebar at your left
+        <p>In case the sidebar is empty, and doesnt have any available 'pages', go to the endpoint /loadDatabase and the local database will be filled with
+          the pages available in the mongoDB
         </p>
 
         <h2>The various endpoints</h2>
@@ -31,6 +30,7 @@
           <li><strong>/loadDatabase</strong>, this will load your LOCAL "database", not mongoDB</li>
           <li><strong>/changeTheme</strong>, you wont need this, this is for the theme toggle button</li>
           <li><strong>/addNewPage</strong>, the page where you can make additional pages for this site, these will be stored both locally and in mongoDB</li>
+          <li><strong>/tmp</strong>, this is a page made for testing purposes</li><br>
           <li><strong>/pages/:title</strong>, this will load a pages content depending on what data is stored in your local database</li><br>
           <strong>POST</strong>
           <li><strong>/pages</strong>, you wont need this, but this is the endpoint for newly created pages</li><br>
