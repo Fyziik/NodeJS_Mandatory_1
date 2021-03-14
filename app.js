@@ -47,13 +47,15 @@ mongoClient.connect(url, function(err, db) {
   });
 });
 
+
+
 //This is only for other people if their database is empty, then this will load a local "default" database with some of the session pages I've created earlier
 app.get("/loadDatabase", (req, res) => {
     pagesDatabase = [
         {
           _id: '604a2e605fdb051eb4c4d792',
-          title: 'Session1',
-          titleRendered: 'Session 1',
+          title: 'Session 1',
+          titleData: 'Session1',
           content: '<h2>What is Node.js</h2>\n' +
             '          <p>\n' +
             '            Before talking about Node.js, we have to talk about Javascript. \n' +
@@ -101,8 +103,8 @@ app.get("/loadDatabase", (req, res) => {
         },
         {
           _id: '604a2fcc5fdb051eb4c4d793',
-          title: 'Session2',
-          titleRendered: 'Session 2',
+          title: 'Session 2',
+          titleData: 'Session2',
           content: '<h1>APIs <button type="button" class="btn btn-primary" id="APIButton">Show</button></h1>\n' +
             '        \n' +
             '        <div id="APISection" class="contentSection" hidden>\n' +
@@ -213,8 +215,8 @@ app.get("/loadDatabase", (req, res) => {
         },
         {
           _id: '604a30005fdb051eb4c4d794',
-          title: 'Session3',
-          titleRendered: 'Session 3',
+          title: 'Session 3',
+          titleData: 'Session3',
           content: '<div class="sessionContent">\n' +
             '          <h2>Theory about variables (var vs let & const)</h2>\n' +
             '          <p>\n' +
@@ -269,8 +271,8 @@ app.get("/loadDatabase", (req, res) => {
         },
         {
           _id: '604a302a5fdb051eb4c4d795',
-          title: 'Session4',
-          titleRendered: 'Session 4',
+          title: 'Session 4',
+          titleData: 'Session4',
           content: '<div class="sessionContent">\n' +
             '          <h2>Functional Loops</h2>\n' +
             '          <p>\n' +
@@ -318,8 +320,8 @@ app.get("/loadDatabase", (req, res) => {
         },
         {
           _id: '604a30375fdb051eb4c4d796',
-          title: 'Session5',
-          titleRendered: 'Session 5',
+          title: 'Session 5',
+          titleData: 'Session5',
           content: '  <div class="sessionContent">\n' +
             '          <h2>How to serve .html files</h2>\n' +
             '          <p>\n' +
