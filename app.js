@@ -397,10 +397,10 @@ app.get("/edit/:title", (req, res) => {
 //Page for new page creation
 app.get("/addNewPage", (req, res) => {
     if (loggedIn) {
-      const emptyObj = {
+      const emptyObj = [{
         title: "",
         content: ""
-      }
+      }]
 
       res.render('pages/sessionAdd', {resultToInsert: emptyObj, result: pagesDatabase, mode: lightmode, themeButtonText: themeButtonText, loggedIn: loggedIn})
     }
