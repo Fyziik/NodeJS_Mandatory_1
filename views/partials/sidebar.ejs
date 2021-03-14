@@ -36,7 +36,7 @@
               <a href="/pages/<%=result[i].title%>" class="btn btn-primary">Go to page</a>
               <% if (loggedIn) { %>
               <a href="/edit/<%=result[i].title%>" class="btn btn-warning">Edit</a>
-              <a id="deleteButton<%=i%>" class="btn btn-danger">Delete</a>
+              <a id="<%=result[i].title%>" class="btn btn-danger">Delete</a>
               <% } %>
             </div>
           </div>
@@ -52,7 +52,7 @@
 <script>
 
 $('.btn-danger').click((e) => {
-  console.log(e)
+  console.log(e.target)
 })
 
 
