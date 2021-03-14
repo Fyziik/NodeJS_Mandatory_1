@@ -409,6 +409,8 @@ app.post("/pages", (req, res) => {
 
           //If already in DB, update it instead
 
+          console.log(reuslt)
+
           if (result !== undefined) {
             //Update locally
             pagesDatabase = pagesDatabase.map(page => {
