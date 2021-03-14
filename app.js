@@ -35,7 +35,6 @@ mongoClient.connect(url, function(err, db) {
       pagesDatabase = result
       db.close();
     });
-    dbo.collection("pages").createIndex( {title : 1}, {unique : true})
 });
 
 mongoClient.connect(url, function(err, db) {
