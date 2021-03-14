@@ -428,7 +428,7 @@ app.post("/pages", (req, res) => {
               title : req.body.pageTitle,
               titleData : titleData,
               content : req.body.pageContent,
-              tags : req.body.pageTags
+              tags : ["TMP"]
             }}
 
             console.log(myQuery)
