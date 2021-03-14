@@ -393,9 +393,7 @@ app.post("/pages", (req, res) => {
                 console.log(err); 
                 res.redirect('/');
               } 
-              else {
-                db.close;
-              }
+              db.close;
               
           });
           //If no errors with mongoDB, insert into local db
