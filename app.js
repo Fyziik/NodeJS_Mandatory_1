@@ -421,6 +421,7 @@ app.post("/pages", (req, res) => {
           const result = pagesDatabase.filter(element => element.title === req.body.pageTitle)
 
           //If already in DB, update it instead
+          console.log(result)
           if (result !== undefined) {
 
             //Update mongoDB
@@ -441,10 +442,8 @@ app.post("/pages", (req, res) => {
             //Update locally
             getPagesMongoDB()
             
-          }
+          } else { //Else insert brand new document
 
-          //Else insert brand new document
-          else {
             dbo.collection("pages").insertOne(myObj, function(err, db){
               if (err) {
                 console.log(err); 
@@ -458,7 +457,6 @@ app.post("/pages", (req, res) => {
             });
           }
 
-          console.log(typeof pagesDatabase)
 
       });
   }
