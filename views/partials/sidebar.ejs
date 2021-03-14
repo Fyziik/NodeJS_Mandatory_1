@@ -51,8 +51,18 @@
 <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
 <script>
 
-$('.btn-danger').click((e) => {
+$('.btn-danger').click(async (e) => {
   console.log(e.target.id)
+
+  const clickedTitle = e.target.id
+
+  await fetch("https://mandatory-assignment-nodejs.herokuapp.com/pages/" + clickedTitle, {
+      method: 'POST'
+    }).then(
+      setInterval(() => {
+        window.location = '/'
+      }, 350)
+    );
 })
 
 
