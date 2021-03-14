@@ -389,7 +389,7 @@ app.post("/pages", (req, res) => {
           let myObj = { title: req.body.pageTitle, titleData: titleData, content: req.body.pageContent, tags: req.body.pageTags }
 
           dbo.collection("pages").insertOne(myObj, function(err, db){
-              if (err) console.log(err);
+              if (err) res.redirect('/');
               db.close;
           });
           //If no errors with mongoDB, insert into local db
