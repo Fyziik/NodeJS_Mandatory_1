@@ -455,7 +455,7 @@ app.post("/pages", (req, res) => {
             });
           }
 
-          console.log(pagesDatabase)
+          console.log(typeof pagesDatabase)
 
       });
   }
