@@ -7,8 +7,16 @@
         <span style="font-size: 1.5rem; font-weight: 800;">Learn.js</span>
       </a>
       <button class="btn btn-dark" id="themeButton"><%= themeButtonText %></button>
+      
+      <% if (loggedIn) { %>
+
       <a href="/addNewPage"><button class="btn btn-primary">Add new page</button></a>
 
+      <% } else {%>
+
+        <a href="/login"><button class="btn btn-primary">Login</button></a>
+
+      <% } %>
     </div>
 
     <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>

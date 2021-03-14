@@ -12,6 +12,10 @@ MongoDB collection for a page should contain:
 - Title (This is the session number at top and the name in the sidebar)
 - Text field (This is the text on each page, should be able to insert html tags)
 
+MongoDB collection for login should contain:
+- username
+- password
+
 
 
 

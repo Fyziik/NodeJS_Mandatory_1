@@ -12,6 +12,9 @@ let lightmode = true
 let themeButtonText = "Darkmode"
 let pythonResponse = 0
 
+let loggedIn = false
+let loggedInUsername
+
 // Make imgs folder servable, and set view engine to ejs for partials & views to be able to render
 app.use("/imgs", express.static(__dirname + '/imgs'))
 app.use("/css", express.static(__dirname + '/css'))
@@ -23,6 +26,7 @@ const port = 8080
 // mongoDB databased stored locally so I dont have to connect to the DB each time spending precious ressources
 // this happens on startup and is then saved locally in the 'pagesDatabase' variable, then updated appropiately during runtime
 let pagesDatabase
+let usersDatabase
 mongoClient.connect(url, function(err, db) {
     if (err) throw err;
     const dbo = db.db("mandatoryDB");
@@ -31,6 +35,16 @@ mongoClient.connect(url, function(err, db) {
       pagesDatabase = result
       db.close();
     });
+});
+
+mongoClient.connect(url, function(err, db) {
+  if (err) throw err;
+  const dbo = db.db("mandatoryDB");
+  dbo.collection("users").find({}).toArray(function(err, result) {
+    if (err) throw err;
+    usersDatabase = result
+    db.close();
+  });
 });
 
 //This is only for other people if their database is empty, then this will load a local "default" database with some of the session pages I've created earlier
@@ -332,12 +346,12 @@ app.get("/changeTheme", (req, res) => {
     } else {
         themeButtonText = "Lightmode"
     }
-    res.render('pages/index', {result: pagesDatabase, mode: lightmode, themeButtonText: themeButtonText})
+    res.render('pages/index', {result: pagesDatabase, mode: lightmode, themeButtonText: themeButtonText, loggedIn: loggedIn})
 })
 
 //Index page serving
 app.get("/", (req, res) => {
-    res.render('pages/index', {result: pagesDatabase, mode: lightmode, themeButtonText: themeButtonText})
+    res.render('pages/index', {result: pagesDatabase, mode: lightmode, themeButtonText: themeButtonText, loggedIn: loggedIn})
 })
 
 //Session page serving from various IDs
@@ -347,13 +361,34 @@ app.get("/pages/:title", (req, res) => {
     const result = pagesDatabase.filter(element => element.title === title)
 
     // allResults = all pages, result = single page looking for, mode = light or dark mode, themeButtonText = text on button depending on state
-    res.render('pages/session', {result: allResults, pageContent: result, mode: lightmode, themeButtonText: themeButtonText})
+    res.render('pages/session', {result: allResults, pageContent: result, mode: lightmode, themeButtonText: themeButtonText, loggedIn: loggedIn})
     
 })
 
 //Page for new page creation
 app.get("/addNewPage", (req, res) => {
-    res.render('pages/sessionAdd', {result: pagesDatabase, mode: lightmode, themeButtonText: themeButtonText})
+    if (loggedIn) {
+      res.render('pages/sessionAdd', {result: pagesDatabase, mode: lightmode, themeButtonText: themeButtonText, loggedIn: loggedIn})
+    }
+    res.redirect('/')
+})
+
+app.get("/login", (req, res) => {
+  res.render('pages/login', {result: pagesDatabase, mode: lightmode, themeButtonText: themeButtonText, loggedIn: loggedIn})
+})
+
+//Post for login
+app.post("/login", (req, res) => {
+  const inputUsername = req.body.username
+  const inputPassword = req.body.password
+
+  usersDatabase.forEach(element => {
+    if (element.username === inputUsername && element.password === inputPassword) {
+       loggedInUsername = element.username
+       loggedIn = true
+    }
+  });
+  res.redirect('/')
 })
 
 //POST for adding a new page
@@ -411,7 +446,7 @@ app.delete("/pages/:title", (req, res) => {
 
 //Retrieve Python calculator page
 app.get("/python", (req, res) => {
-  res.render('pages/python', {result: pagesDatabase, mode: lightmode, themeButtonText: themeButtonText, pythonResponse: pythonResponse})
+  res.render('pages/python', {result: pagesDatabase, mode: lightmode, themeButtonText: themeButtonText, pythonResponse: pythonResponse, loggedIn: loggedIn})
 })
 
 //Retrieve game page
@@ -451,7 +486,7 @@ app.post("/python", (req, res) => {
 })
 
 app.get("/tmp", (req, res) => {
-  res.render('pages/tmp', {result: pagesDatabase, mode: lightmode, themeButtonText: themeButtonText})
+  res.render('pages/tmp', {result: pagesDatabase, mode: lightmode, themeButtonText: themeButtonText, loggedIn: loggedIn})
 })
 
 app.listen(process.env.PORT || port, (error) => {
