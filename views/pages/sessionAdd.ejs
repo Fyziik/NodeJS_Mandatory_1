@@ -130,7 +130,9 @@
         'Content-Type': 'application/json'
       }
     }).then(
-      window.location = '/'
+      setInterval(() => {
+        window.location = '/'
+      }, 150)
     );
     
     
