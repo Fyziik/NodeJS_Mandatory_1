@@ -62,7 +62,9 @@ $('#submitButton').click( async () => {
         'Content-Type': 'application/json'
       }
     });
-    location.reload()
+    setInterval(() => {
+          location.reload()
+    }, 150)
   })
 
 </script>

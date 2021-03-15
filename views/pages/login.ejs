@@ -65,8 +65,13 @@ $('#submitButton').click( async () => {
       headers: {
         'Content-Type': 'application/json'
       }
-    })
-    window.location = '/'
+    }).then(
+      setInterval(() => {
+        
+      }, 250)
+    );
+    
+    
 })
 
 </script>
