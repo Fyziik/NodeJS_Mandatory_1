@@ -58,11 +58,8 @@ $('.btn-danger').click(async (e) => {
 
   await fetch("https://mandatory-assignment-nodejs.herokuapp.com/pages/" + clickedTitle, {
       method: 'DELETE'
-    }).then(
-      setInterval(() => {
-        window.location = '/'
-      }, 350)
-    );
+    })
+    window.location = '/'
 })
 
 
